@@ -44,7 +44,7 @@ public class EventListServlet extends HttpServlet {
 			
 			// GETパラメータとして月を取得
 			String month = request.getParameter("month");
-			System.out.println(month);//2022-08が返される
+			//System.out.println(month);  2022-08が返される
 			
 			// GETパラメータあり→findByMonth()
 			// Getパラメータなし→findAll

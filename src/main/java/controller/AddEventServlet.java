@@ -48,11 +48,10 @@ public class AddEventServlet extends HttpServlet {
 			String name = request.getParameter("name");
 		
 			String strDate = request.getParameter("date");
-			
 			//LocalDateTimeでもできるかも
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 			Date date = sdFormat.parse(strDate);
-			System.out.println(date);
+		
 			
 			String place = request.getParameter("place");
 			
@@ -75,9 +74,14 @@ public class AddEventServlet extends HttpServlet {
 			//Dao接続
 			//確認画面なし
 				EventDao eventDao = DaoFactory.createEventDao();
+
 				eventDao.insert(event);
-				request.getRequestDispatcher("/WEB-INF/view/eventList.jsp").forward(request, response);
-				//
+				//イベントリストへ移動(eventListServletを通して)
+				response.sendRedirect("eventList");
+				
+				//↓下記ではリストの情報が反映されない
+				//request.getRequestDispatcher("/WEB-INF/view/eventList.jsp").forward(request, response);
+			
 			
 		} catch (Exception e) {
 			// 

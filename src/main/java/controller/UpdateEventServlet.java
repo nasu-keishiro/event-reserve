@@ -70,11 +70,14 @@ public class UpdateEventServlet extends HttpServlet {
 			String strId = request.getParameter("id");
 			Integer id = Integer.parseInt(strId);
 			
+			
 			String name = request.getParameter("name");
 			
 			String strDate = request.getParameter("date");
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+			
 			Date date = sdFormat.parse(strDate);
+			//System.out.println(date);
 			
 			String place = request.getParameter("place");
 			
@@ -86,6 +89,7 @@ public class UpdateEventServlet extends HttpServlet {
 			
 			//DTOへ
 			Event event = new Event();
+			event.setId(id);
 			event.setName(name);
 			event.setDate(date);
 			event.setPlace(place);
@@ -99,7 +103,9 @@ public class UpdateEventServlet extends HttpServlet {
 			
 			//完了画面表示(内容表示も)
 			request.setAttribute("name", name);
-			request.setAttribute("date", date);
+			//JSPの表示用に日時の表示変更
+			SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+			request.setAttribute("date",sdFormat2.format(date));
 			request.setAttribute("place", place);
 			request.setAttribute("capacity", capacity);
 			request.setAttribute("contents", contents);
@@ -111,5 +117,9 @@ public class UpdateEventServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
+
+	
+		
+	
 
 }

@@ -47,7 +47,13 @@ public class DeleteEventServlet extends HttpServlet {
 			
 			
 			//イベント情報、予約者リストも表示させる
-			request.setAttribute("event", event);
+			request.setAttribute("id",event.getId());
+			request.setAttribute("name",event.getName());
+			request.setAttribute("date",event.getDate());
+			request.setAttribute("place",event.getPlace());
+			request.setAttribute("capacity",event.getCapacity());
+			request.setAttribute("contents",event.getContents() );
+			request.setAttribute("remarks",event.getRemarks());
 			request.setAttribute("reserveList", reserveList);
 			request.getRequestDispatcher("WEB-INF/view/eventDelete.jsp").forward(request, response);
 		
@@ -65,15 +71,31 @@ public class DeleteEventServlet extends HttpServlet {
 		String strId = request.getParameter("id");
 		Integer id = Integer.parseInt(strId);
 		
+		EventDao eventDao = DaoFactory.createEventDao();
+		Event event = new Event();
+				
+		
 		try {
-			Event event = new Event();
-			event.setId(id);
+			//削除の前に、完了画面表示用に、Idからデータを持ってきて先にセット
+			Event event1 = eventDao.findById(id);
+			request.setAttribute("name",event1.getName());
+			request.setAttribute("date",event1.getDate());
+			request.setAttribute("place",event1.getPlace());
+			request.setAttribute("capacity",event1.getCapacity());
+			request.setAttribute("contents",event1.getContents() );
+			request.setAttribute("remarks",event1.getRemarks());
+		} catch (Exception e1) {
 			
-			EventDao eventDao = DaoFactory.createEventDao();
+			throw new ServletException(e1);
+		}
+		
+		
+		
+		try {
+			//Idからイベント削除
+			event.setId(id);
 			eventDao.delete(event);
 			
-			//完了画面の表示（内容も）
-			request.setAttribute("", response);
 			request.getRequestDispatcher("/WEB-INF/view/eventDeleteDone.jsp").forward(request, response);
 		
 		} catch (Exception e) {

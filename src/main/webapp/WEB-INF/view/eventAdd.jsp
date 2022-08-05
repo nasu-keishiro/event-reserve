@@ -43,5 +43,5 @@
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>
 
-
+</body>
 </html>

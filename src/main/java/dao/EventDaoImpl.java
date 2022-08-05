@@ -143,7 +143,7 @@ public class EventDaoImpl implements EventDao {
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,event.getName());
-			//パターン①×
+			//パターン①×sqlよりutilが親要素のため
 			//stmt.setDate(2,(java.sql.Date) event.getDate()); //キャストしますか？で出てきたまま
 			//パターン②時間なし
 			//java.util.Dateからjava.sql.Dateに変換(前やってた)
@@ -168,20 +168,21 @@ public class EventDaoImpl implements EventDao {
 		// 
 		try(Connection con = ds.getConnection()){
 			String sql = "UPDATE event_list"
-					+ "SET event_name = ?, event_date = ?, event_place = ?,"
-					+ " event_capacity, event_remarks"
-					+ "WHERE id = ?";
+					+ " SET event_name = ?, event_date = ?, event_place = ?,"
+					+ " event_capacity = ?, event_contents = ?, event_remarks = ?"
+					+ " WHERE id = ?";
 			 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,event.getName());
 			//stmt.setDate(2,(java.sql.Date) event.getDate()); //キャストしますか？で出てきたまま
 			// stmt.setObject(2, event.getDate(), Types.DATE);
 			//パターン③〇
-			stmt.setObject(2, event.getDate(), Types.DATE);
+			stmt.setTimestamp(2, new Timestamp(event.getDate().getTime()));
 			stmt.setString(3,event.getPlace());
 			stmt.setObject(4,event.getCapacity(), Types.INTEGER);
 			stmt.setString(5,event.getContents());
 			stmt.setString(6,event.getRemarks());
+			stmt.setObject(7,event.getId(),Types.INTEGER);
 			stmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -208,7 +209,8 @@ public class EventDaoImpl implements EventDao {
 	private Event mapToEvent(ResultSet rs) throws Exception {
 		Integer id = (Integer) rs.getObject("id");
 		String name = rs.getString("event_name");
-		Date date = rs.getDate("event_date");
+		//getDate → getTimestamp変更　時間まで取得
+		Date date = rs.getTimestamp("event_date");
 		String place = rs.getString("event_place");
 		Integer capacity = (Integer) rs.getObject("event_capacity");
 		String contents = rs.getString("event_contents");
