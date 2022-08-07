@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
+import dao.EventDao;
+import dao.ReserveDao;
+import domain.Event;
+import domain.Reserve;
+
 /**
  * Servlet implementation class ReserveServlet
  */
@@ -27,35 +33,78 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		response.getWriter().append("Served at: ").append(request.getContextPath());
-	request.getRequestDispatcher("/WEB-INF/view/reserve.jsp").forward(request, response);
+	//event,jspからクリックしたeventIdを取得
+			String strEventId = request.getParameter("id");
+			
+			//受け取ったString型をInt型に変換
+			int eventId = Integer.parseInt(strEventId);
+		
+			
+			try {
+				//eventIdからfindByIdから1つのイベント情報を取得する
+				EventDao eventDao = DaoFactory.createEventDao();
+				Event event = eventDao.findById(eventId);
+				
+				
+				//１件分のイベント情報
+				request.setAttribute("eventId", event.getId());
+				request.setAttribute("name", event.getName());
+				request.setAttribute("date", event.getDate());
+				request.setAttribute("place", event.getPlace());
+				request.setAttribute("contents", event.getContents());
+	
+	
+				request.getRequestDispatcher("/WEB-INF/view/reserveForm.jsp").forward(request, response);
+			} catch (Exception e) {
+		
+				throw new ServletException(e);
+			}
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("name");
-		request.getParameter("age");
-		request.getParameter("address");
-		request.getParameter("tell");
-		request.getParameter("email");
-		request.getParameter(""); //イベントIdをここに入れる
+		//JSPから受け取り
+		try {
+		String name = request.getParameter("name");
+		String strAge = request.getParameter("age");
+		Integer age = Integer.parseInt(strAge);
+		String address = request.getParameter("address");
+		String strTell = request.getParameter("tell");
+		Integer tell = Integer.parseInt(strTell);
+		String email = request.getParameter("email");
+		String id = request.getParameter("eventId"); 
+		Integer reserveNum = Integer.parseInt(id);
 		
-		/**
-		 * domain型に入れてDaoに入れ込み
-		 * Member member = new Member();
-		 * member.setName(name);
-		 * member.setAge(age);
-		 * member.setAddress(address);
-		 * member.setTell(tell);
-		 * member.setEmail(email);
-		 * member.setEventId(eventId);
-		 * 
-		 * 
-		 * EventDao eventDao = DaoFactory.createReserveDao();
-		 */
+		//DTO
+		Reserve reserve = new Reserve();
+		reserve.setName(name);
+		reserve.setAge(age);
+		reserve.setAddress(address);
+		reserve.setTell(tell);
+		reserve.setEmail(email);
+		reserve.setReserveNum(reserveNum);
+		
+		//Dao
+		ReserveDao reserveDao = DaoFactory.createReserveDao();
+		reserveDao.insert(reserve);
+		
+		//予約完了リストに入力情報を表示
+		EventDao eventDao = DaoFactory.createEventDao();
+		Event event = eventDao.findById(reserveNum);
+		request.setAttribute("name",name);
+		request.setAttribute("age",age);
+		request.setAttribute("address",address);
+		request.setAttribute("tell",tell);
+		request.setAttribute("email",email);
+		request.setAttribute("eventName",event.getName());
 		
 		request.getRequestDispatcher("/WEB-INF/view/reserveDone.jsp").forward(request, response);
+		}catch(Exception e) {
+			throw new ServletException(e);
+		}
 	}
 
 }

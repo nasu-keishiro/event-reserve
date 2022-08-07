@@ -5,13 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="parts/commonCss.jsp" />
-<title>イベント一覧</title>
+<title>健康・栄養イベント情報</title>
 
 </head>
 <header>
-	<h1>イベント一覧</h1>
-	<h2>新着情報</h2>
+	<h1>健康・栄養イベント情報</h1>
+	
+
+</header>
+<body>
+<h2>新着情報</h2>
 	<dl>
+	<%-- 管理者ページに新着情報更新Formatを追加してもよし --%>
 		<dt>2022年11月のイベント追加</dt>
 		<dd>○○による運動相談付の面談も実施されます。</dd>
 		<dt>2022年10月のイベント情報</dt>
@@ -22,137 +27,29 @@
 		<dd>多くのご予約をいただき満席のため終了とさせていただきます。</dd>
 	</dl>
 	<img alt="" src="">
+	
+	<form action="">
+<input name="month" type="month" min="" max="" value="">
+<input type="submit">
+</form>
 
-</header>
-<body>
 
-	<div class="tabs">
-		<input type="radio" name="tab_name" id="tab1" checked> <label
-			class="tab_class" for="tab1">８月</label>
-		<div class="content_class">
-			<p>
-				<c:forEach items="${memberList}" var="member">
-					<table border="1">
-						<tr>
-							<th>タイトル</th>
-							<td><c:out value="${member.id}" /></td>
-							<th>日付</th>
-							<td><c:out value="${member.name}" /></td>
-							<th>場所</th>
-							<td><c:out value="${member.age}" /></td>
-							<th>内容</th>
-							<td><c:out value="${member.address}" /></td>
-							<th>残り予約数</th>
-							<td><c:out value="${member.typeName}" /></td>
-							
-						</tr>
-					</table>
-				<input type="submit" value="参加する">
-				</c:forEach>
-			</p>
-		</div>
-		<input type="radio" name="tab_name" id="tab2"> <label
-			class="tab_class" for="tab2">９月</label>
-		<div class="content_class">
-			<p>
-			<c:forEach items="${memberList}" var="member">
-					<table border="1">
-						<tr>
-							<th>ID</th>
-							<td><c:out value="${member.id}" /></td>
-							<th>名前</th>
-							<td><c:out value="${member.name}" /></td>
-							<th>年齢</th>
-							<td><c:out value="${member.age}" /></td>
-							<th>住所</th>
-							<td><c:out value="${member.address}" /></td>
-							<th>会員種別</th>
-							<td><c:out value="${member.typeName}" /></td>
-							<th>登録日</th>
-							<td><c:out value="${member.created}" /></td>
-						</tr>
-					</table>
-					<input type="submit" value="参加する">
-				</c:forEach>
-			</p>
-		</div>
-		<input type="radio" name="tab_name" id="tab3"> <label
-			class="tab_class" for="tab3">１０月</label>
-		<div class="content_class">
-			<p>
-			<c:forEach items="${memberList}" var="member">
-					<table border="1">
-						<tr>
-							<th>ID</th>
-							<td><c:out value="${member.id}" /></td>
-							<th>名前</th>
-							<td><c:out value="${member.name}" /></td>
-							<th>年齢</th>
-							<td><c:out value="${member.age}" /></td>
-							<th>住所</th>
-							<td><c:out value="${member.address}" /></td>
-							<th>会員種別</th>
-							<td><c:out value="${member.typeName}" /></td>
-							<th>登録日</th>
-							<td><c:out value="${member.created}" /></td>
-						</tr>
-					</table>
-					<input type="submit" value="参加する">
-				</c:forEach>
-			</p>
-		</div>
-		<input type="radio" name="tab_name" id="tab4"> <label
-			class="tab_class" for="tab4">１１月</label>
-		<div class="content_class">
-			<p>
-			<c:forEach items="${memberList}" var="member">
-					<table border="1">
-						<tr>
-							<th>ID</th>
-							<td><c:out value="${member.id}" /></td>
-							<th>名前</th>
-							<td><c:out value="${member.name}" /></td>
-							<th>年齢</th>
-							<td><c:out value="${member.age}" /></td>
-							<th>住所</th>
-							<td><c:out value="${member.address}" /></td>
-							<th>会員種別</th>
-							<td><c:out value="${member.typeName}" /></td>
-							<th>登録日</th>
-							<td><c:out value="${member.created}" /></td>
-						</tr>
-					</table>
-					<input type="submit" value="参加する">
-				</c:forEach>
-			</p>
-		</div>
-		<input type="radio" name="tab_name" id="tab5"> <label
-			class="tab_class" for="tab5">１２月</label>
-		<div class="content_class">
-			<p>
-			<c:forEach items="${memberList}" var="member">
-					<table border="1">
-						<tr>
-							<th>ID</th>
-							<td><c:out value="${member.id}" /></td>
-							<th>名前</th>
-							<td><c:out value="${member.name}" /></td>
-							<th>年齢</th>
-							<td><c:out value="${member.age}" /></td>
-							<th>住所</th>
-							<td><c:out value="${member.address}" /></td>
-							<th>会員種別</th>
-							<td><c:out value="${member.typeName}" /></td>
-							<th>登録日</th>
-							<td><c:out value="${member.created}" /></td>
-						</tr>
-					</table>
-					<input type="submit" value="参加する">
-				</c:forEach>
-			</p>
-		</div>
-	</div>
+<%-- 初期表示として今月のイベント情報を表示する --%>
+<table border="1">
 
+<c:forEach items="${eventMonthList}" var="event">
+<tr><th>イベント名</th></tr><td><a href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></td>
+<tr><th>日程</th></tr><td><c:out value="${event.date}" /></td>
+<tr><th>場所</th></tr><td><c:out value="${event.place}" /></td>
+<tr><th>定員</th></tr><td><c:out value="${event.capacity}" /></td>
+
+<br>
+</c:forEach>
+
+</table>
+	
+	<h3><a href="reserveConfirmation">予約確認</a></h3>
+	
 	<ul>
 		<li>ホーム</li>
 		<li><a href="">会社概要</a></li>

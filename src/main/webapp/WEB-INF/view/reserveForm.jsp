@@ -12,13 +12,13 @@
 		<h2>イベント詳細</h2>
 		<p>
 			イベント名
-			<c:out value="${event.name }" />
+			<c:out value="${name}" />
 			日程
-			<c:out value="${event.data}" />
+			<c:out value="${date}" />
 			場所
-			<c:out value="${event.plece }" />
-			費用
-			<c:out value="${event.prise }" />
+			<c:out value="${plece}" />
+			内容
+			<c:out value="${contents}" />
 		</p>
 		
 		<iframe
@@ -30,12 +30,13 @@
 
 
 	<form action="" method="post">
-	名前<input type="text" name="name" value="<c:out value="${name}" />">
-	年齢<input type="text" name="age" value="<c:out value="${age}" />">>
-	住所<input type="text" name="address" value="<c:out value="${address}" />">>
-	電話番号<input type="text" name="tell" value="<c:out value="${tell}" />">>
-	E-mail<input type="text" name="email" value="<c:out value="${email}" />">>
-	予約イベント   <c:out value="${event.name }" />
+	名前：<input type="text" name="name" >
+	年齢：<input type="number" name="age" >
+	住所：<input type="text" name="address" >
+	電話番号：<input type="number" name="tell" >
+	E-mail：<input type="text" name="email" >
+	予約イベント：<input type="checkbox" name="<c:out value="${eventId}" />" value="<c:out value="${name}" />" checked >
+	
 	<input type="submit" value="予約する">
 	</form>
 	

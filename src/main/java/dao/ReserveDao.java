@@ -12,4 +12,5 @@ public interface ReserveDao {
 	void insert(Reserve reserve) throws Exception;
 	void update(Reserve reserve) throws Exception;
 	void delete(Reserve reserve) throws Exception;
+	Reserve findByReserveNumAndReserveName(String reserveNum, String name);
 }

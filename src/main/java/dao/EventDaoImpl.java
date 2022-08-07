@@ -147,8 +147,8 @@ public class EventDaoImpl implements EventDao {
 			//stmt.setDate(2,(java.sql.Date) event.getDate()); //キャストしますか？で出てきたまま
 			//パターン②時間なし
 			//java.util.Dateからjava.sql.Dateに変換(前やってた)
-			long d = event.getDate().getTime();
-			stmt.setDate(2, new java.sql.Date(d));
+			//long d = event.getDate().getTime();
+			//stmt.setDate(2, new java.sql.Date(d));
 			//パターン③時間 試行中
 			stmt.setTimestamp(2, new Timestamp(event.getDate().getTime()));
 			stmt.setString(3,event.getPlace());
