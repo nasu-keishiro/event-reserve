@@ -78,6 +78,9 @@ public class ReserveServlet extends HttpServlet {
 		String id = request.getParameter("eventId"); 
 		Integer reserveNum = Integer.parseInt(id);
 		
+		//ランダムな10文字の確認番号を生成
+		String confirmationNum = null;
+		
 		//DTO
 		Reserve reserve = new Reserve();
 		reserve.setName(name);
@@ -86,6 +89,7 @@ public class ReserveServlet extends HttpServlet {
 		reserve.setTell(tell);
 		reserve.setEmail(email);
 		reserve.setReserveNum(reserveNum);
+		reserve.setConfirmationNum(confirmationNum);
 		
 		//Dao
 		ReserveDao reserveDao = DaoFactory.createReserveDao();
@@ -100,6 +104,7 @@ public class ReserveServlet extends HttpServlet {
 		request.setAttribute("tell",tell);
 		request.setAttribute("email",email);
 		request.setAttribute("eventName",event.getName());
+		request.setAttribute("confirmationNum", confirmationNum);
 		
 		request.getRequestDispatcher("/WEB-INF/view/reserveDone.jsp").forward(request, response);
 		}catch(Exception e) {

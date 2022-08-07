@@ -168,9 +168,30 @@ public class ReserveDaoImpl implements ReserveDao {
 		
 	}
 	@Override
-	public Reserve findByReserveNumAndReserveName(String reserveNum, String name) {
+	public Reserve findByReserveNumAndReserveName(String reserveNum, String name) throws Exception {
 		// ログイン認証と似たような流れで実装
-		return null;
+		Reserve reserve = null;
+		try(Connection con = ds.getConnection()){
+			//DBの予約番号で検索(カラムをconfirmationNumで仮設定)
+			String sql = "SELECT * FROM user_list WEHRE confirmationNum=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, reserveNum);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				if(name.equals(rs.getString("name"))) {
+					reserve = mapToReserve(rs);
+				}
+			}
+			
+			
+			
+		}catch(Exception e){
+			throw e;
+		}
+		
+		
+		return reserve;
 	}
 	
 	private Reserve mapToReserve
@@ -182,9 +203,10 @@ public class ReserveDaoImpl implements ReserveDao {
 		Integer tell = (Integer) rs.getObject("user_tell");
 		String email = rs.getString("user_email");
 		Integer reserveNum = (Integer) rs.getObject("reserve_num");
+		String confirmation = rs.getString("confirmationNum");
 		
 		
-		return new Reserve(id, name, age, address, tell, email, reserveNum);
+		return new Reserve(id, name, age, address, tell, email, reserveNum, confirmation);
 	}
 
 

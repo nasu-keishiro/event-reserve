@@ -9,9 +9,18 @@ public class Reserve {
 	private Integer tell;
 	private String email;
 	private Integer reserveNum;
+	private String confirmationNum;
 	
+	public String getConfirmationNum() {
+		return confirmationNum;
+	}
+
+	public void setConfirmationNum(String confirmationNum) {
+		this.confirmationNum = confirmationNum;
+	}
+
 	public Reserve(Integer id, String name, Integer age, String address, Integer tell, String email,
-			Integer reserveNum) {
+			Integer reserveNum, String confirmation) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,6 +29,7 @@ public class Reserve {
 		this.tell = tell;
 		this.email = email;
 		this.reserveNum = reserveNum;
+		this.confirmationNum = confirmation;
 	}
 
 	public Reserve() {
