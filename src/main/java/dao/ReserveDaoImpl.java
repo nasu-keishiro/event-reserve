@@ -26,11 +26,7 @@ public class ReserveDaoImpl implements ReserveDao {
 		List<Reserve> reserveList = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT" 
-					+ " user_list.id, user_list.user_name, user_list.user_age,"
-					+ " user_list.user_address, user_list.user_tell,"
-					+ " user_list.user_email, user_list.reserve_num"
-					+ " FROM user_list"
+			String sql = "SELECT * FROM user_list"
 					+ " JOIN event_list"
 					+ " ON event_list.id = user_list.reserve_num";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -52,11 +48,7 @@ public class ReserveDaoImpl implements ReserveDao {
 		List<Reserve> reserveMonth = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT" 
-					+ " user_list.id, user_list.user_name, user_list.user_age,"
-					+ " user_list.user_address, user_list.user_tell,"
-					+ " user_list.user_email, user_list.reserve_num"
-					+ " FROM user_list"
+			String sql = "SELECT * FROM user_list"
 					+ " JOIN event_list"
 					+ " ON event_list.id = user_list.reserve_num"
 					+ " WHERE event_list.id = ?";
@@ -195,8 +187,37 @@ public class ReserveDaoImpl implements ReserveDao {
 		return reserve;
 	}
 	
-	private Reserve mapToReserve
-	(ResultSet rs) throws Exception{
+	@Override
+	public long NumberOfReservations(Integer id) throws Exception {
+		//Count関数はLong型を使用する
+		
+		//eventIdからreserveNumをカウント
+		long num = 0;
+		try(Connection con = ds.getConnection()){
+			//カウント関数で予約数を検索
+			String sql = "SELECT COUNT(*) AS num FROM event_reserve.user_list"
+					   + " WHERE reserve_num=?";
+			//ASで一時的なカラム名を決めて取り出すときに使う
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1,  id);
+			ResultSet rs = stmt.executeQuery();
+			//ReseultSetはSQL文の表みたいなイメージで、next()で行を指す
+			//いくつも行を取り出すときはWhileでループ
+			if(rs.next()) {
+				num = rs.getLong("num");
+			}
+			
+			
+			
+			
+		}catch(Exception e) {
+			throw e;
+		}
+		
+		return num;
+	}
+	
+	private Reserve mapToReserve(ResultSet rs) throws Exception{
 		Integer id = (Integer) rs.getObject("id");
 		String name = rs.getString("user_name");
 		Integer age = (Integer) rs.getObject("user_age");
@@ -209,6 +230,7 @@ public class ReserveDaoImpl implements ReserveDao {
 		
 		return new Reserve(id, name, age, address, tell, email, reserveNum, confirmation);
 	}
+
 
 
 

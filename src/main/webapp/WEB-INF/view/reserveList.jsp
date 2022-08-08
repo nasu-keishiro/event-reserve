@@ -18,6 +18,8 @@
 <th>住所</th>
 <th>電話番号</th>
 <th>メールアドレス</th>
+<th>予約イベント</th>
+<th>予約日時</th>
 <th>データの操作</th>
 
 </tr>
@@ -28,6 +30,8 @@
 <td><c:out value="${reserve.address}" /></td>
 <td><c:out value="${reserve.tell}" /></td>
 <td><c:out value="${reserve.email}" /></td>
+<td><c:out value="event name" /></td>
+<td><c:out value="event date" /></td>
 <td><a href="deleteMember?id=<c:out value="${reserve.id}" />">削除</a></td>
 
 </tr>

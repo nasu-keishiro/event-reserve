@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import calculation.Capacity;
 import calculation.RamdomChar;
 import dao.DaoFactory;
 import dao.EventDao;
@@ -41,6 +41,8 @@ public class ReserveServlet extends HttpServlet {
 			//受け取ったString型をInt型に変換
 			int eventId = Integer.parseInt(strEventId);
 		
+			Capacity capa = new Capacity();
+			int remaining = capa.getRemaining(eventId);
 			
 			try {
 				//eventIdからfindByIdから1つのイベント情報を取得する
@@ -54,6 +56,7 @@ public class ReserveServlet extends HttpServlet {
 				request.setAttribute("date", event.getDate());
 				request.setAttribute("place", event.getPlace());
 				request.setAttribute("contents", event.getContents());
+				request.setAttribute("remaining", remaining);
 	
 	
 				request.getRequestDispatcher("/WEB-INF/view/reserveForm.jsp").forward(request, response);
@@ -69,11 +72,11 @@ public class ReserveServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			 // キャッシュを無効にする
-			response.setHeader("Pragma","no-cache");
-			response.setHeader("Cache-Control","no-cache");
-			response.setDateHeader("Expires",0);
+			//esponse.setHeader("Pragma","no-cache");
+			//response.setHeader("Cache-Control","no-cache");
+			//response.setDateHeader("Expires",0);
 			
-			response.setContentType("text/html; charset=Shift_JIS");
+			/*response.setContentType("text/html; charset=Shift_JIS");
 			PrintWriter out = response.getWriter();
 			out.println("<html>");
 			out.println("<head><title>CacheServlet</title></head>");
@@ -81,7 +84,7 @@ public class ReserveServlet extends HttpServlet {
 			out.println("このページはキャッシュされません。");
 			out.println("</body></html>");
 			out.close();
-		
+		*/
 		
 		
 		

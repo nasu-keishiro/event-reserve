@@ -19,6 +19,8 @@
 			<c:out value="${plece}" />
 			内容
 			<c:out value="${contents}" />
+			定員
+			残り<c:out value="${remaining}" />
 		</p>
 		
 		<iframe
