@@ -15,7 +15,7 @@
 <h1>予約完了</h1>
 
 <h2>予約番号</h2>
-<%-- 実装するかは…？ --%>
+<c:out value="${confirmationNum}"></c:out>
 
 <p>
 予約いただき、誠にありがとうございます<br>
@@ -31,6 +31,7 @@
 <p>電話番号：<c:out value="${tell}" /></p>
 <p>E-mail：<c:out value="${email}" /></p>
 
+<a href="event">イベント一覧へ戻る</a>
 
 </body>
 </html>

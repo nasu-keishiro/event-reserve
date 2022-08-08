@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import calculation.RamdomChar;
 import dao.DaoFactory;
 import dao.EventDao;
 import dao.ReserveDao;
@@ -66,6 +68,23 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			 // キャッシュを無効にする
+			response.setHeader("Pragma","no-cache");
+			response.setHeader("Cache-Control","no-cache");
+			response.setDateHeader("Expires",0);
+			
+			response.setContentType("text/html; charset=Shift_JIS");
+			PrintWriter out = response.getWriter();
+			out.println("<html>");
+			out.println("<head><title>CacheServlet</title></head>");
+			out.println("<body>");
+			out.println("このページはキャッシュされません。");
+			out.println("</body></html>");
+			out.close();
+		
+		
+		
+		
 		//JSPから受け取り
 		try {
 		String name = request.getParameter("name");
@@ -79,7 +98,8 @@ public class ReserveServlet extends HttpServlet {
 		Integer reserveNum = Integer.parseInt(id);
 		
 		//ランダムな10文字の確認番号を生成
-		String confirmationNum = null;
+		RamdomChar strNum = new RamdomChar();
+		String confirmationNum = strNum.getRandomString(10);
 		
 		//DTO
 		Reserve reserve = new Reserve();
@@ -92,6 +112,7 @@ public class ReserveServlet extends HttpServlet {
 		reserve.setConfirmationNum(confirmationNum);
 		
 		//Dao
+		//System.out.println(reserveNum); //1が返ってきている
 		ReserveDao reserveDao = DaoFactory.createReserveDao();
 		reserveDao.insert(reserve);
 		

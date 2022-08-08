@@ -44,25 +44,26 @@ public class ReserveConfirmationServlet extends HttpServlet {
 		
 		try {
 		String name = request.getParameter("name");
-		String reserveNum = request.getParameter("reserveNum");
+		String confirmationNum = request.getParameter("confirmationNum");
 		
 		ReserveDao reserveDao = DaoFactory.createReserveDao();
 		//引数がStringのfindByNumで1件分のデータを取得
-		Reserve reserve = reserveDao.findByReserveNumAndReserveName(reserveNum, name);
+		Reserve reserve = reserveDao.findByReserveNumAndReserveName(confirmationNum, name);
 		
 		if(reserve != null) {
 			
 			//1件分の予約者情報の取得
-			
+			//Reserve reserve2 = reserveDao.findById(21);
 			request.setAttribute("name",reserve.getName() );
 			request.setAttribute("age",reserve.getAge() );
 			request.setAttribute("address", reserve.getAddress());
 			request.setAttribute("tell", reserve.getTell());
 			request.setAttribute("email", reserve.getEmail());
+			request.setAttribute("confirmationNum",confirmationNum);
 			
 			//reserveNumから1件分のイベント情報の取得
 			EventDao eventDao = DaoFactory.createEventDao();
-			Event event = eventDao.findById(reserve.getId());
+			Event event = eventDao.findById(reserve.getReserveNum());
 			
 			request.setAttribute("eventName", event.getName());
 			request.setAttribute("date", event.getDate());

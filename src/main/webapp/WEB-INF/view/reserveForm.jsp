@@ -35,12 +35,13 @@
 	住所：<input type="text" name="address" >
 	電話番号：<input type="number" name="tell" >
 	E-mail：<input type="text" name="email" >
-	予約イベント：<input type="checkbox" name="<c:out value="${eventId}" />" value="<c:out value="${name}" />" checked >
+	予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" />
 	
+	<%-- 残り予約数が０の場合は、予約ボタンを押せないようにブランクにする(script) --%>
 	<input type="submit" value="予約する">
 	</form>
 	
-	<a href="/event">予約一覧へ戻る</a>
+	<a href="event">イベント一覧へ戻る</a>
 	
 	<ul>
 		<li>ホーム</li>

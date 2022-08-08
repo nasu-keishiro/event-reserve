@@ -10,7 +10,7 @@
 </header>
 <body>
 <form action="" method="post">
-<p>予約番号<input type="text" name="reserveNum"></p>
+<p>予約番号<input type="text" name="confirmationNum"></p>
 <p>氏名<input type="text" name="name"></p>
 
 <input type="submit" value="送信">

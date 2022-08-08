@@ -84,7 +84,7 @@ public class ReserveDaoImpl implements ReserveDao {
 			String sql = "SELECT" 
 					+ " user_list.id, user_list.user_name, user_list.user_age,"
 					+ " user_list.user_address, user_list.user_tell,"
-					+ " user_list.user_email, user_list.reserve_num"
+					+ " user_list.user_email, user_list.reserve_num, user_list.confirmationNum"
 					+ " FROM user_list"
 					+ " JOIN event_list"
 					+ " ON event_list.id = user_list.reserve_num"
@@ -111,9 +111,9 @@ public class ReserveDaoImpl implements ReserveDao {
 		// 
 		try(Connection con = ds.getConnection()){
 			String sql = "INSERT INTO user_list"
-					+ " (user_name, user_age, user_address, user_tell"
-					+ " user_email, reserve_num)"
-					+ " VALUES (?, ?, ?, ?, ?, ?)";
+					+ " (user_name, user_age, user_address, user_tell,"
+					+ " user_email, reserve_num, confirmationNum)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, reserve.getName());
@@ -122,6 +122,7 @@ public class ReserveDaoImpl implements ReserveDao {
 			stmt.setObject(4, reserve.getTell(),Types.INTEGER);
 			stmt.setString(5, reserve.getEmail());
 			stmt.setObject(6, reserve.getReserveNum(),Types.INTEGER);
+			stmt.setString(7, reserve.getConfirmationNum());
 			stmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -168,18 +169,18 @@ public class ReserveDaoImpl implements ReserveDao {
 		
 	}
 	@Override
-	public Reserve findByReserveNumAndReserveName(String reserveNum, String name) throws Exception {
+	public Reserve findByReserveNumAndReserveName(String confirmationNum, String name) throws Exception {
 		// ログイン認証と似たような流れで実装
 		Reserve reserve = null;
 		try(Connection con = ds.getConnection()){
-			//DBの予約番号で検索(カラムをconfirmationNumで仮設定)
-			String sql = "SELECT * FROM user_list WEHRE confirmationNum=?";
+			//DBの予約番号で検索
+			String sql = "SELECT * FROM user_list WHERE confirmationNum=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, reserveNum);
+			stmt.setString(1, confirmationNum);
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				if(name.equals(rs.getString("name"))) {
+				if(name.equals(rs.getString("user_name"))) {
 					reserve = mapToReserve(rs);
 				}
 			}
