@@ -2,8 +2,15 @@ package calculation;
 
 public class RamdomChar {
 	
+	/**
+	 * ランダムなStringの文字列の生成
+	 * @param 生成するランダムな文字数(int)
+	 * @return 希望した文字数のランダムな文字(String)
+	 */
+	
 	    public String getRandomString(int i) {
-			
+	    	
+	    	
 			//Math.random()を使った10文字のランダムな文字列
 			//ランダムな10文字のString
 			StringBuilder builder;

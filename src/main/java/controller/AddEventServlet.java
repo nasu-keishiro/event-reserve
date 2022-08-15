@@ -26,7 +26,7 @@ public class AddEventServlet extends HttpServlet {
      */
     public AddEventServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**

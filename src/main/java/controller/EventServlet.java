@@ -26,7 +26,7 @@ public class EventServlet extends HttpServlet {
      */
     public EventServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -46,6 +46,10 @@ public class EventServlet extends HttpServlet {
 		EventDao eventDao = DaoFactory.createEventDao();
 		List<Event> eventList;
 		eventList = eventDao.findByMonth(month);
+		//TODO 残り予約数を表示させる
+		//Event Id = eventList.get(1);
+	    //Integer eventId = Integer.valueOf(Id);
+		
 		request.setAttribute("eventMonthList", eventList);
 		request.getRequestDispatcher("/WEB-INF/view/event.jsp").forward(request,response);
 		
@@ -61,7 +65,7 @@ public class EventServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 

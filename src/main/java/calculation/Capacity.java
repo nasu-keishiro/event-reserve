@@ -7,8 +7,11 @@ import domain.Event;
 
 public class Capacity {
 
-	//残り予約数を計算するメゾット
-	//引数にeventIdをとる
+	/**
+	 * 残り予約数を計算するメゾット
+	 * @param eventId イベントのID情報(int)
+	 * @return 残り予約数(int)
+	 */
 	public int getRemaining(int i) {
 			
 		int remaining = 0;
@@ -28,7 +31,7 @@ public class Capacity {
 			remaining = capacity - num2;
 			
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
+			// 
 			e.printStackTrace();
 		}
 		
@@ -37,5 +40,6 @@ public class Capacity {
 		
 		return remaining ;
 	}
+	
 	
 }

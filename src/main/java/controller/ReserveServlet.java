@@ -28,7 +28,7 @@ public class ReserveServlet extends HttpServlet {
      */
     public ReserveServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -40,7 +40,7 @@ public class ReserveServlet extends HttpServlet {
 			
 			//受け取ったString型をInt型に変換
 			int eventId = Integer.parseInt(strEventId);
-		
+			//残り予約数を取得
 			Capacity capa = new Capacity();
 			int remaining = capa.getRemaining(eventId);
 			
@@ -71,7 +71,8 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			 // キャッシュを無効にする
+		//XXX キャッシュ無効処理　エラー	 
+		// キャッシュを無効にする
 			//esponse.setHeader("Pragma","no-cache");
 			//response.setHeader("Cache-Control","no-cache");
 			//response.setDateHeader("Expires",0);

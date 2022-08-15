@@ -27,7 +27,7 @@ public class DeleteEventServlet extends HttpServlet {
      */
     public DeleteEventServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**

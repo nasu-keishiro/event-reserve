@@ -26,7 +26,7 @@ public class UpdateEventServlet extends HttpServlet {
      */
     public UpdateEventServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -55,7 +55,7 @@ public class UpdateEventServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/eventUpdate.jsp").forward(request, response);
 		
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
+			// 
 			throw new ServletException(e);
 		}
 		

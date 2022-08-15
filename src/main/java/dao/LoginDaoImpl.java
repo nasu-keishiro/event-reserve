@@ -21,31 +21,31 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public List<Admin> findAll() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		// 
 		return null;
 	}
 
 	@Override
 	public Admin findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		// 
 		return null;
 	}
 
 	@Override
 	public void insert(Admin admin) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		// 
 
 	}
 
 	@Override
 	public void update(Admin admin) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		// 
 
 	}
 
 	@Override
 	public void delete(Admin admin) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		// 
 
 	}
 

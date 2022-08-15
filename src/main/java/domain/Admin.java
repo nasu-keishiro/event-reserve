@@ -16,7 +16,7 @@ public class Admin {
 
 
 	public Admin() {
-		// TODO 自動生成されたコンストラクター・スタブ
+		// 
 	}
 
 

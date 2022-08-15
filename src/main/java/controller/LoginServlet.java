@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public LoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	/**
@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 			String loginPass = request.getParameter("loginPass");
 			LoginDao loginDao = DaoFactory.createLoginDao();
 			Admin admin = loginDao.findByLoginIdAndLoginPass(loginId, loginPass);
+			System.out.println(admin);
 			
 			if(admin != null) {
 				//データ保持

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import calculation.Capacity;
 import dao.DaoFactory;
 import dao.EventDao;
 import dao.ReserveDao;
@@ -27,7 +28,7 @@ public class ReserveMonthListServlet extends HttpServlet {
      */
     public ReserveMonthListServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -41,11 +42,15 @@ public class ReserveMonthListServlet extends HttpServlet {
 		//受け取ったString型をInt型に変換
 		int eventId = Integer.parseInt(strEventId);
 	
+		//残り予約の取得
+		Capacity capa = new Capacity();
+		int remaining = capa.getRemaining(eventId);
 		
 		try {
 			//eventIdからfindByIdから1つのイベント情報を取得する
 			EventDao eventDao = DaoFactory.createEventDao();
 			Event event = eventDao.findById(eventId);
+			
 			
 			
 			ReserveDao reserveDao = DaoFactory.createReserveDao();
@@ -55,8 +60,10 @@ public class ReserveMonthListServlet extends HttpServlet {
 			request.setAttribute("name", event.getName());
 			request.setAttribute("date", event.getDate());
 			request.setAttribute("place", event.getPlace());
+			request.setAttribute("capacity", event.getCapacity());
 			request.setAttribute("remarks", event.getRemarks());
 			//request.setAttribute("event_name", event.());
+			request.setAttribute("remaining", remaining);
 			
 			//予約者リスト
 			request.setAttribute("reserveMonth", reserveMonth);
@@ -74,7 +81,7 @@ public class ReserveMonthListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 

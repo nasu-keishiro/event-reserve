@@ -39,6 +39,7 @@
 	E-mail：<input type="text" name="email" >
 	予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" />
 	
+	<%-- TODO スクリプト処理 --%>
 	<%-- 残り予約数が０の場合は、予約ボタンを押せないようにブランクにする(script) --%>
 	<input type="submit" value="予約する">
 	</form>

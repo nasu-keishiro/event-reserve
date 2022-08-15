@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import calculation.Capacity;
 import dao.DaoFactory;
 import dao.EventDao;
 import domain.Event;
@@ -25,7 +26,7 @@ public class EventListServlet extends HttpServlet {
      */
     public EventListServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -50,12 +51,26 @@ public class EventListServlet extends HttpServlet {
 			// Getパラメータなし→findAll
 			if(month != null) {
 			    eventList = eventDao.findByMonth(month);
+			    
+			    //TODO リスト型からIdを取得 int型へ変換できず
+			    Event Id = eventList.get(1);
+			    //Integer eventId = Integer.valueOf(Id);
+			    
+			    
+			    //残り予約数を取得
+			    Capacity capa = new Capacity();
+			    
+				int remaining = capa.getRemaining(eventId);
+				
 			}else {
 			    eventList = eventDao.findAll();	
 			}
 			
+			
+			
+			
 			// jsp用にセット
-			//request.setAttribute("n" ,n);
+			//request.setAttribute("remaining" ,remainig);
 			request.setAttribute("eventList",eventList );
 			request.getRequestDispatcher("/WEB-INF/view/eventList.jsp").forward(request, response);
 		} catch (Exception e) {

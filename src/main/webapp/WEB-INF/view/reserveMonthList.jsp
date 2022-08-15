@@ -11,6 +11,8 @@
 <h2>内容と特記事項:</h2>
 <p>日付:<c:out value="${date}" /></p>
 <p>場所:<c:out value="${place}" /></p>
+<p>定員:<c:out value="${capacity}" />名</p>
+<p>残り:<c:out value="${remaining}" />枠</p>
 <p>特記事項:<c:out value="${remarks}" /></p>
 <!--  <p>残り予約数<c:out value="${remaining}" /></p>-->
 </header>

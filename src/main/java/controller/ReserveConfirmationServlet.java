@@ -26,7 +26,7 @@ public class ReserveConfirmationServlet extends HttpServlet {
      */
     public ReserveConfirmationServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
