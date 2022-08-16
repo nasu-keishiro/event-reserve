@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class AuthFilter
  */
 @WebFilter("/*")
+//TODO 管理者画面だけフィルター
 public class AuthFilter extends HttpFilter implements Filter {
        
     /**

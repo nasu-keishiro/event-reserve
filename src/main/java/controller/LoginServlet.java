@@ -43,13 +43,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		//TODO ログイン　バリデーション
 		try {
 			String loginId = request.getParameter("loginId");
 			String loginPass = request.getParameter("loginPass");
 			LoginDao loginDao = DaoFactory.createLoginDao();
 			Admin admin = loginDao.findByLoginIdAndLoginPass(loginId, loginPass);
-			System.out.println(admin);
+			//System.out.println(admin);
 			
 			if(admin != null) {
 				//データ保持

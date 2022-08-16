@@ -11,8 +11,9 @@ public class Event {
 	private Integer capacity;
 	private String contents;
 	private String remarks;
+	private Integer remaining;
 	
-	public Event(Integer id, String name, Date date, String place, Integer capacity, String contents, String remarks) {
+	public Event(Integer id, String name, Date date, String place, Integer capacity, String contents, String remarks, Integer remaining) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -81,6 +82,14 @@ public class Event {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Integer getRemaining() {
+		return remaining;
+	}
+
+	public void setRemaining(Integer remaining) {
+		this.remaining = remaining;
 	}
 	
 	

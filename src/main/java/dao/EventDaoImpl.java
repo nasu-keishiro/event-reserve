@@ -215,8 +215,9 @@ public class EventDaoImpl implements EventDao {
 		Integer capacity = (Integer) rs.getObject("event_capacity");
 		String contents = rs.getString("event_contents");
 		String remarks = rs.getString("event_remarks");
+		Integer remaining = 0;
 
-		return new Event(id, name, date, place, capacity, contents, remarks);
+		return new Event(id, name, date, place, capacity, contents, remarks, remaining);
 	}
 
 	

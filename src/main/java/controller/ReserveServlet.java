@@ -87,7 +87,7 @@ public class ReserveServlet extends HttpServlet {
 			out.close();
 		*/
 		
-		
+		//TODO ユーザー予約　バリデーション
 		
 		//JSPから受け取り
 		try {

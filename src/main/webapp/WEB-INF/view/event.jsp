@@ -28,8 +28,8 @@
 	</dl>
 	<img alt="" src="">
 	
-	<form action="">
-<input name="month" type="month" min="" max="" value="">
+<form action="">
+<input name="month" type="month" min="" max="" value="2022-08">
 <input type="submit">
 </form>
 
@@ -42,6 +42,7 @@
 <tr><th>日程</th></tr><td><c:out value="${event.date}" /></td>
 <tr><th>場所</th></tr><td><c:out value="${event.place}" /></td>
 <tr><th>定員</th></tr><td><c:out value="${event.capacity}" /></td>
+<tr><th>残り枠数</th></tr><td><c:out value="${event.remaining}" /></td>
 
 <br>
 </c:forEach>

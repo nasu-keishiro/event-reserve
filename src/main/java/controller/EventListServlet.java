@@ -40,8 +40,6 @@ public class EventListServlet extends HttpServlet {
 			EventDao eventDao = DaoFactory.createEventDao();
 			List<Event> eventList;
 
-			//aタグに入れる”月”データの取得
-			//Event n = eventDao.findByMonth();
 			
 			// GETパラメータとして月を取得
 			String month = request.getParameter("month");
@@ -52,27 +50,32 @@ public class EventListServlet extends HttpServlet {
 			if(month != null) {
 			    eventList = eventDao.findByMonth(month);
 			    
-			    //TODO リスト型からIdを取得 int型へ変換できず
-			    Event Id = eventList.get(1);
-			    //Integer eventId = Integer.valueOf(Id);
+			    int i = 0;
+			    while(eventList.size() > i) {
+			  //リスト型からIdを取得
+			  Event event = eventList.get(i);
+			  //event型の一つのまとまり(id name address...)がi番目の配列のまとまりとして取り出し
+			  //その中のIdを取得している↓
+			  int eventId =event.getId();
 			    
-			    
-			    //残り予約数を取得
-			    Capacity capa = new Capacity();
-			    
-				int remaining = capa.getRemaining(eventId);
-				
+			  //残り予約数を取得
+			  Capacity capa = new Capacity();
+			  Integer remaining = capa.getRemaining(eventId);
+		      //リスト型にremainingを上書き
+		      event.setRemaining(remaining);
+		      
+		      i++;
+		      }
+			  
 			}else {
 			    eventList = eventDao.findAll();	
+			    
 			}
 			
-			
-			
-			
 			// jsp用にセット
-			//request.setAttribute("remaining" ,remainig);
 			request.setAttribute("eventList",eventList );
 			request.getRequestDispatcher("/WEB-INF/view/eventList.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}		

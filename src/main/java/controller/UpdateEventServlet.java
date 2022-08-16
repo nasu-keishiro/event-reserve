@@ -58,14 +58,13 @@ public class UpdateEventServlet extends HttpServlet {
 			// 
 			throw new ServletException(e);
 		}
-		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			//TODOイベント更新　バリデーション
 			//編集したデータの取得
 			String strId = request.getParameter("id");
 			Integer id = Integer.parseInt(strId);

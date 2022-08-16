@@ -43,6 +43,7 @@ n = n + 1
 <th>日程</th>
 <th>場所</th>
 <th>定員</th>
+<th>残り予約数</th>
 <th colspan="2">データの操作</th>
 
 </tr>
@@ -52,7 +53,7 @@ n = n + 1
 <td><c:out value="${event.date}" /></td>
 <td><c:out value="${event.place}" /></td>
 <td><c:out value="${event.capacity}" /></td>
-
+<td><c:out value="${event.remaining}" /></td>
 <td><a href="updateEvent?id=<c:out value="${event.id}" />">更新</a></td>
 <td><a href="deleteEvent?id=<c:out value="${event.id}" />">削除</a></td>
 
