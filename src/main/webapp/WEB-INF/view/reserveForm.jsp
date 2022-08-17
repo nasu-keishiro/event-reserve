@@ -38,10 +38,10 @@
 	電話番号：<input type="number" name="tell" >
 	E-mail：<input type="text" name="email" >
 	予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" />
+	 <label for="privacyCheck"><a href="" target="_blank" >個人情報取り扱い同意</a></label>
+	<input type="checkbox" id="privacyCheck" >
 	
-	<%-- TODO スクリプト処理 --%>
-	<%-- 残り予約数が０の場合は、予約ボタンを押せないようにブランクにする(script) --%>
-	<input type="submit" value="予約する">
+	<input type="submit" id="js-submit" value="予約する">
 	</form>
 	
 	<a href="event">イベント一覧へ戻る</a>
@@ -54,7 +54,35 @@
 		<li><a href="">お問い合わせ</a></li>
 
 	</ul>
+	
+	<%-- 残り予約数が０の場合は、予約ボタンを押せないようにブランクにする --%>
+		<script>
+		<%--残り予約数が0の時の処理 --%>
+	let	remainig = <c:out value="${remaining}" />; 
+	
+    if( remainig <= 0){
+	const button = document.querySelector("#js-submit");
+	<%-- またはconst button = document.getElementById("ボタンのID"); --%>
+	button.disabled = true
+    }else{
+	<%-- 同意するのチェックボックス --%>
+	const consent_chk = document.querySelector('#privacyCheck');
+	<%-- 送信ボタン --%>
+	const submit_btn = document.querySelector('input[type=submit]'');
 
+	<%-- チェックボックスの入力イベント --%>
+	consent_chk.addEventListener('change', () => {
+	
+	<%-- チェックボックスがあれば無効化をオフ、なければオン --%>
+	if (consent_chk.checked === true) {
+		submit_btn.disabled = false;
+	} else {
+		submit_btn.disabled = true;
+	}
+});
+	}
+
+	</script>
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>
