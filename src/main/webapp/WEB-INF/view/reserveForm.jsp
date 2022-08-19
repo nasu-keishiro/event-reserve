@@ -41,7 +41,7 @@
 	 <label for="privacyCheck"><a href="" target="_blank" >個人情報取り扱い同意</a></label>
 	<input type="checkbox" id="privacyCheck" >
 	
-	<input type="submit" id="js-submit" value="予約する">
+	<input type="submit" id="js-submit" value="予約する" disabled>
 	</form>
 	
 	<a href="event">イベント一覧へ戻る</a>
@@ -66,9 +66,9 @@
 	button.disabled = true
     }else{
 	<%-- 同意するのチェックボックス --%>
-	const consent_chk = document.querySelector('#privacyCheck');
+	const consent_chk = document.querySelector(`#privacyCheck`);
 	<%-- 送信ボタン --%>
-	const submit_btn = document.querySelector('input[type=submit]'');
+	const submit_btn = document.querySelector(`input[type=submit]`);
 
 	<%-- チェックボックスの入力イベント --%>
 	consent_chk.addEventListener('change', () => {
