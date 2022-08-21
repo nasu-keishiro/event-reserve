@@ -6,17 +6,19 @@
 <meta charset="UTF-8">
 <c:import url="parts/commonCss.jsp" />
 <title>健康・栄養イベント情報</title>
+<link rel="stylesheet" href="././css/style_user.css">
+<link rel="stylesheet" href="././css/style_user_eve.css">
+<style type="text/css">
+	header {background-image: url('https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg');}
+</style>
 
 </head>
-<header>
+	<header>
 	<h1>健康・栄養イベント情報</h1>
-	
-
-</header>
-<body>
-<h2>新着情報</h2>
-	<dl>
-	<%-- 管理者ページに新着情報更新Formatを追加してもよし --%>
+	<div class="info">
+		<h2>新着情報</h2>
+		<dl>
+	<%-- 管理者ページに新着情報更新Formatを追加してもよし --%>  
 		<dt>2022年11月のイベント追加</dt>
 		<dd>○○による運動相談付の面談も実施されます。</dd>
 		<dt>2022年10月のイベント情報</dt>
@@ -26,30 +28,41 @@
 		<dt>2022年8月のイベント終了(満席)</dt>
 		<dd>多くのご予約をいただき満席のため終了とさせていただきます。</dd>
 	</dl>
-	<img alt="" src="">
+	</div>	
+	<br>
+
+</header>
+
+<body>
 	
+<br>
+<div class="container">
 <form action="">
 <input name="month" type="month" min="" max="" value="2022-08">
 <input type="submit">
 </form>
-
+<h3><a href="reserveConfirmation" class="itemB">予約確認</a></h3>
+</div>
 
 <%-- 初期表示として今月のイベント情報を表示する --%>
-<table border="1">
-
 <c:forEach items="${eventMonthList}" var="event">
-<tr><th>イベント名</th></tr><td><a href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></td>
-<tr><th>日程</th></tr><td><c:out value="${event.date}" /></td>
-<tr><th>場所</th></tr><td><c:out value="${event.place}" /></td>
-<tr><th>定員</th></tr><td><c:out value="${event.capacity}" /></td>
-<tr><th>残り枠数</th></tr><td><c:out value="${event.remaining}" /></td>
-
+<div class="event">
+<img class="img" src="https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg">
+<div class="detail">
+<p>イベント名:<a href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></p>
+<p>日程:<c:out value="${event.date}" /></p>
+<p>場所:<c:out value="${event.place}" /></p>
+<p>定員:<c:out value="${event.capacity}" /></p>
+<p>残り枠数:<c:out value="${event.remaining}" /></p>
+</div>
+</div>
+<br>
 <br>
 </c:forEach>
 
-</table>
+
 	
-	<h3><a href="reserveConfirmation">予約確認</a></h3>
+
 	
 	<ul>
 		<li>ホーム</li>

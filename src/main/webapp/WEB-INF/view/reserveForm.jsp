@@ -5,44 +5,73 @@
 <head>
 <meta charset="UTF-8">
 <title>イベント予約フォーム</title>
+<link rel="stylesheet" href="././css/style_user.css">
+<link rel="stylesheet" href="././css/style_user_ref.css">
+<style type="text/css"> /*DBに登録してある画像を表示させる*/
+	header {background-image: url('https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg');}
+</style>
 </head>
 <body>
 	<header>
 		<h1>イベント予約フォーム</h1>
+		<div class="info">
 		<h2>イベント詳細</h2>
-		<p>
-			イベント名
-			<c:out value="${name}" />
-			日程
-			<c:out value="${date}" />
-			場所
-			<c:out value="${plece}" />
-			内容
-			<c:out value="${contents}" />
-			定員
-			残り<c:out value="${remaining}" />
-		</p>
+		<p>イベント名:<c:out value="${name}" /></p>
+			<p>日程:<c:out value="${date}" /></p>
+			<p>場所:<c:out value="${plece}" /></p>
+			<p>内容:<c:out value="${contents}" /></p>
+			<p>定員:<c:out value="${capacity}" />名</p>
+			<p>残り:<c:out value="${remaining}" />名</p>
 		
-		<iframe
-			src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12971.095496832771!2d139.5677784!3d35.6333007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x10fea757d9c7e680!2z44GC44GE44Go44G044GC44K744Oz44K_44O8!5e0!3m2!1sja!2sjp!4v1658470812151!5m2!1sja!2sjp"
-			width="600" height="450" style="border: 0;" allowfullscreen=""
-			loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-			このページはiframe表示に対応したブラウザでご覧ください </iframe>
+		</div>
+		<br>
+		
+		
 	</header>
 
-
-	<form action="" method="post">
-	名前：<input type="text" name="name" >
-	年齢：<input type="number" name="age" >
-	住所：<input type="text" name="address" >
-	電話番号：<input type="number" name="tell" >
-	E-mail：<input type="text" name="email" >
-	予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" />
+	<div class="form-wrapper">
+	<form action="" method="post" class="form">
+	<p>名前：<input class="text" type="text" name="name" ></p>
+	<p>年齢：<input class="text" type="number" name="age" ></p>
+	<p>住所：<input class="text" type="text" name="address" ></p>
+	<p>電話番号：<input class="text" type="number" name="tell" ></p>
+	<p>E-mail：<input class="text" type="text" name="email" ></p>
+	<p>予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" /></p>
 	 <label for="privacyCheck"><a href="" target="_blank" >個人情報取り扱い同意</a></label>
 	<input type="checkbox" id="privacyCheck" >
+	<br>
 	
-	<input type="submit" id="js-submit" value="予約する" disabled>
+	<p class="text-center"><input type="submit" id="js-submit" value="予約する" disabled></p>
 	</form>
+	</div>
+	
+	<script>
+	<%-- 残り予約数が0の時の処理 --%>
+	let	remainig = 3; <%-- JSPでの記述<c:out value="${remaining}" />; --%>
+	<%-- let element = document.getElementById('privacyCheck'); --%>
+    if( remainig <= 0){
+	const button = document.querySelector("#js-submit");
+	<%-- またはconst button = document.getElementById("ボタンのID"); --%>
+	button.disabled = true
+    }else{
+	<%-- 同意するのチェックボックス --%>
+	const consent_chk = document.querySelector(`#privacyCheck`);
+	<%-- 送信ボタン --%>
+	const submit_btn = document.querySelector(`input[type=submit]`);
+
+	<%-- チェックボックスの入力イベント --%>
+	consent_chk.addEventListener('change', () => {
+	
+	<%-- チェックボックスがあれば無効化をオフ、なければオン --%>
+	if (consent_chk.checked === true) {
+		submit_btn.disabled = false;
+	} else {
+		submit_btn.disabled = true;
+	}
+});
+	}
+
+	</script>
 	
 	<a href="event">イベント一覧へ戻る</a>
 	

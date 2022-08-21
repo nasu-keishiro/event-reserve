@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.text-center {
+    text-align: center;
+}
+
+.form-wrapper {
+    text-align: center;
+}
+
+.form{
+    text-align: right;
+    display: inline-block;
+}
+
+.text {
+    width: 200px;
+    height: 30px;
+}
+
+.moji {
+    letter-spacing: 4px;
+}
+
+.conf {
+    text-align: center;
+}
