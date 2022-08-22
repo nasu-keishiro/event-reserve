@@ -47,7 +47,7 @@
 	
 	<script>
 	<%-- 残り予約数が0の時の処理 --%>
-	let	remainig = 3; <%-- JSPでの記述<c:out value="${remaining}" />; --%>
+	let	remainig = <c:out value="${remaining}" />; <%-- JSPでの記述<c:out value="${remaining}" />; --%>
 	<%-- let element = document.getElementById('privacyCheck'); --%>
     if( remainig <= 0){
 	const button = document.querySelector("#js-submit");
