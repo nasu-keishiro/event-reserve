@@ -5,11 +5,17 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>イベント管理</title>
+<title>ログアウト</title>
+<link rel="stylesheet" href="././css/style_admin_log.css">
 </head>
-<body>
+
+<header>
 <h1>ログアウト</h1>
 <p>ログアウトしました</p>
 <p><a href="login">ログイン画面に戻る</a></p>
+</header>
+
+<body>
+
 </body>
 </html>

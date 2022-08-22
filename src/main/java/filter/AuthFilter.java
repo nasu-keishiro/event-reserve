@@ -48,7 +48,8 @@ public class AuthFilter extends HttpFilter implements Filter {
 		//HTTPの全てを保持
 		
 		String uri = req.getRequestURI();
-		if(!uri.endsWith("/login")) {
+		if(!uri.endsWith("/login") &&
+			 !uri.contains("/css/")) {
           //String.EndsWith:文字列インスタンスの末尾が、
 			//指定した文字列と一致するかどうかを判断
 			if(session.getAttribute("loginId") == null) {

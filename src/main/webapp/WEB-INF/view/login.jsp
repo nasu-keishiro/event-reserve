@@ -6,13 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
+<link rel="stylesheet" href="././css/style_admin_log.css">
 </head>
-<body>
-<h1>管理者ログイン</h1>
 
-<c:if test="${not empty error }">
-<p>ログインIDかパスワードが正しくありません。</p>
-</c:if>
+<header>
+   <h1>管理者ログイン</h1>
+ 	<c:if test="${not empty error }">
+   		<p>ログインIDかパスワードが正しくありません。</p>
+	</c:if>
+</header>
+
+<body>
+
 <form action="" method="post">
 <p>
 <input type="text" name="loginId" placeholder="ログインID">
