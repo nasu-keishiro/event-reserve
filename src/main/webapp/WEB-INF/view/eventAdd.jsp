@@ -41,6 +41,7 @@
 		<p>場所：<input class="text" type="text" name="place" value=""></p>
 		<p>定員：<input class="text" type="number" name="capacity" value=""></p>
 		</div>
+		<p>イベント画像：<input type="file" name="image" size="30" ></p>
 		<p>内容：
 	  		<br><textarea name="contents" cols="80" rows="5"></textarea></p>
 		<p>特記事項：

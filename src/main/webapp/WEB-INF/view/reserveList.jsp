@@ -32,7 +32,7 @@
 <td><c:out value="${reserve.email}" /></td>
 <td><c:out value="event name" /></td>
 <td><c:out value="event date" /></td>
-<td><a href="deleteMember?id=<c:out value="${reserve.id}" />">削除</a></td>
+<td><a href="deleteReserve?id=<c:out value="${reserve.id}" />">削除</a></td>
 
 </tr>
 </c:forEach>

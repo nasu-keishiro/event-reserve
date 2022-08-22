@@ -1,14 +1,18 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.DaoFactory;
 import dao.EventDao;
@@ -18,6 +22,8 @@ import domain.Event;
  * Servlet implementation class AddEventServlet
  */
 @WebServlet("/addEvent")
+//アップロードされたファイルの一時保存場所のパス
+@MultipartConfig(location="C:/temp")
 public class AddEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,6 +67,17 @@ public class AddEventServlet extends HttpServlet {
 			String contents = request.getParameter("contents");
 			String remarks = request.getParameter("remarks");
 			
+			// 画像情報の取得
+			Part part = request.getPart("image");
+			String fileName = part.getSubmittedFileName();
+			long fileSize = part.getSize();
+			
+			//ファイルの保存
+			if(fileSize > 0) {
+				File filePath = getUploadDirectory(request);
+				part.write(filePath + "/" + fileName);
+				}
+			
 			//DTO
 			Event event = new Event();
 			event.setName(name);
@@ -69,7 +86,7 @@ public class AddEventServlet extends HttpServlet {
 			event.setCapacity(capacity);
 			event.setContents(contents);
 			event.setRemarks(remarks);
-			
+			event.setFileName(fileName);
 			
 			//Dao接続
 			//確認画面なし
@@ -94,6 +111,15 @@ public class AddEventServlet extends HttpServlet {
         
 		
 		
+		
+	}
+
+	private File getUploadDirectory(HttpServletRequest request) {
+		// ファイルが保存されているフォルダまでのパスを取得する
+		ServletContext context = request.getServletContext();
+		String path = context.getRealPath("/images");
+		// webapp直下のimagesに接続
+		return new File(path);
 		
 	}
 

@@ -216,8 +216,9 @@ public class EventDaoImpl implements EventDao {
 		String contents = rs.getString("event_contents");
 		String remarks = rs.getString("event_remarks");
 		Integer remaining = 0;
+		String fileName = null;
 
-		return new Event(id, name, date, place, capacity, contents, remarks, remaining);
+		return new Event(id, name, date, place, capacity, contents, remarks, remaining, fileName);
 	}
 
 	

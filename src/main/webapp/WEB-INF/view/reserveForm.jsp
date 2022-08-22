@@ -21,7 +21,7 @@
 			<p>場所:<c:out value="${plece}" /></p>
 			<p>内容:<c:out value="${contents}" /></p>
 			<p>定員:<c:out value="${capacity}" />名</p>
-			<p>残り:<c:out value="${remaining}" />名</p>
+			<p id="red">残り:<c:out value="${remaining}" />名</p>
 		
 		</div>
 		<br>
@@ -50,6 +50,7 @@
 	let	remainig = <c:out value="${remaining}" />; <%-- JSPでの記述<c:out value="${remaining}" />; --%>
 	<%-- let element = document.getElementById('privacyCheck'); --%>
     if( remainig <= 0){
+    	document.getElementById('red').style.color = 'red'; <%-- 残り予約数を赤文字にする --%>
 	const button = document.querySelector("#js-submit");
 	<%-- またはconst button = document.getElementById("ボタンのID"); --%>
 	button.disabled = true
@@ -84,34 +85,7 @@
 
 	</ul>
 	
-	<%-- 残り予約数が０の場合は、予約ボタンを押せないようにブランクにする --%>
-		<script>
-		<%--残り予約数が0の時の処理 --%>
-	let	remainig = <c:out value="${remaining}" />; 
-	
-    if( remainig <= 0){
-	const button = document.querySelector("#js-submit");
-	<%-- またはconst button = document.getElementById("ボタンのID"); --%>
-	button.disabled = true
-    }else{
-	<%-- 同意するのチェックボックス --%>
-	const consent_chk = document.querySelector(`#privacyCheck`);
-	<%-- 送信ボタン --%>
-	const submit_btn = document.querySelector(`input[type=submit]`);
 
-	<%-- チェックボックスの入力イベント --%>
-	consent_chk.addEventListener('change', () => {
-	
-	<%-- チェックボックスがあれば無効化をオフ、なければオン --%>
-	if (consent_chk.checked === true) {
-		submit_btn.disabled = false;
-	} else {
-		submit_btn.disabled = true;
-	}
-});
-	}
-
-	</script>
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>

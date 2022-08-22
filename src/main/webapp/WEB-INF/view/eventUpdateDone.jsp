@@ -40,6 +40,8 @@
 <!--  <p>残り予約数<c:out value="${remaining}" /></p>-->
 </div>
 
+	<a class="return" href="eventList">イベントリストへ戻る</a>
+
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>

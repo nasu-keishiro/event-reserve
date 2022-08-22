@@ -12,8 +12,9 @@ public class Event {
 	private String contents;
 	private String remarks;
 	private Integer remaining;
+	private String fileName;
 	
-	public Event(Integer id, String name, Date date, String place, Integer capacity, String contents, String remarks, Integer remaining) {
+	public Event(Integer id, String name, Date date, String place, Integer capacity, String contents, String remarks, Integer remaining, String fileName) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,6 +23,14 @@ public class Event {
 		this.capacity = capacity;
 		this.contents = contents;
 		this.remarks = remarks;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public Event() {
