@@ -8,8 +8,9 @@
 <title>予約完了</title>
 <link rel="stylesheet" href="././css/style_user.css">
 <link rel="stylesheet" href="././css/style_user_ref.css">
+
 <style type="text/css">
-	header {background-image: url('https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg');}
+	header {background-image: url("images/<c:out value="${fileName}" />");}
 </style>
 </head>
 

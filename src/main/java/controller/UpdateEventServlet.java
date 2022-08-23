@@ -1,14 +1,18 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.DaoFactory;
 import dao.EventDao;
@@ -18,6 +22,7 @@ import domain.Event;
  * Servlet implementation class UpdateEventServlet
  */
 @WebServlet("/updateEvent")
+@MultipartConfig(location="C:/Users/zd2L22/temp")
 public class UpdateEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,6 +57,7 @@ public class UpdateEventServlet extends HttpServlet {
 			request.setAttribute("capacity", event.getCapacity());
 			request.setAttribute("contents", event.getContents());
 			request.setAttribute("remarks", event.getRemarks());
+			request.setAttribute("fileName", event.getFileName());
 			request.getRequestDispatcher("/WEB-INF/view/eventUpdate.jsp").forward(request, response);
 		
 		} catch (Exception e) {
@@ -74,9 +80,7 @@ public class UpdateEventServlet extends HttpServlet {
 			
 			String strDate = request.getParameter("date");
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
-			
 			Date date = sdFormat.parse(strDate);
-			//System.out.println(date);
 			
 			String place = request.getParameter("place");
 			
@@ -85,6 +89,18 @@ public class UpdateEventServlet extends HttpServlet {
 			
 			String contents = request.getParameter("contents");
 			String remarks = request.getParameter("remarks");
+			
+			// 画像情報の取得
+			Part part = request.getPart("image");
+			String fileName = part.getSubmittedFileName();
+			long fileSize = part.getSize();
+			
+						
+			//ファイルの保存
+			if(fileSize > 0) {
+				File filePath = getUploadDirectory(request);
+				part.write(filePath + "/" + fileName);
+			}
 			
 			//DTOへ
 			Event event = new Event();
@@ -95,6 +111,7 @@ public class UpdateEventServlet extends HttpServlet {
 			event.setCapacity(capacity);
 			event.setContents(contents);
 			event.setRemarks(remarks);
+			event.setFileName(fileName);
 			
 			//Daoへ
 			EventDao eventDao = DaoFactory.createEventDao();
@@ -117,7 +134,14 @@ public class UpdateEventServlet extends HttpServlet {
 		}
 	}
 
-	
+	private File getUploadDirectory(HttpServletRequest request) {
+		// ファイルが保存されているフォルダまでのパスを取得する
+		ServletContext context = request.getServletContext();
+		String path = context.getRealPath("/images");
+		// webapp直下のimagesに接続
+		return new File(path);
+		
+	}
 		
 	
 

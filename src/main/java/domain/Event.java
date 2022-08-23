@@ -23,6 +23,7 @@ public class Event {
 		this.capacity = capacity;
 		this.contents = contents;
 		this.remarks = remarks;
+		this.fileName = fileName;
 	}
 
 	public String getFileName() {

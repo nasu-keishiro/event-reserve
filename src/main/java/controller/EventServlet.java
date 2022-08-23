@@ -60,6 +60,8 @@ public class EventServlet extends HttpServlet {
 			eventList = eventDao.findByMonth(month);
 		}
 		
+//		System.out.println("-----------------");
+//		eventList.forEach(e -> System.out.println(e.getFileName()));
 		
 		int i = 0;
 		while(eventList.size() > i) {
@@ -71,9 +73,17 @@ public class EventServlet extends HttpServlet {
 		Integer remaining = capa.getRemaining(eventId);
 	    //リスト型にremainingを上書き
 	    event.setRemaining(remaining);
-	      
-	      i++;
-
+	   
+	    
+	     
+	    if( event.getFileName() != null) {
+	    	
+		}else{
+			 event.setFileName("noImage.jpg");
+		}
+		
+	    i++;
+			
 		}
 		
 		request.setAttribute("eventMonthList", eventList);
@@ -82,11 +92,12 @@ public class EventServlet extends HttpServlet {
 		}catch(Exception e) {
 			throw new ServletException(e);
 		}
-		
-	    
-	    
-		
 	}
+		
+	    
+
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

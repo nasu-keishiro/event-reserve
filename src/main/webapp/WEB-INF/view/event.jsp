@@ -8,8 +8,9 @@
 <title>健康・栄養イベント情報</title>
 <link rel="stylesheet" href="././css/style_user.css">
 <link rel="stylesheet" href="././css/style_user_eve.css">
+
 <style type="text/css">
-	header {background-image: url('https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg');}
+	header {background-image: url(images/health2.jpg);}
 </style>
 
 </head>
@@ -47,7 +48,8 @@
 <%-- 初期表示として今月のイベント情報を表示する --%>
 <c:forEach items="${eventMonthList}" var="event">
 <div class="event">
-<img class="img" src="https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg">
+
+<img class="img" src="images/<c:out value="${event.fileName}" />">
 <div class="detail">
 <p>イベント名:<a href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></p>
 <p>日程:<c:out value="${event.date}" /></p>

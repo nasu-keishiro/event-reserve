@@ -68,6 +68,8 @@ public class EventListServlet extends HttpServlet {
 		      }
 			  
 			}else {
+				// TODO 絞り込んで直近の7件のイベントを表示
+				// streamAPIで並び替えて絞る
 			    eventList = eventDao.findAll();	
 			    
 			}

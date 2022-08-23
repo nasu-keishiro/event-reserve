@@ -30,7 +30,8 @@ public class EventDaoImpl implements EventDao {
 			String sql = "SELECT" 
 					+ " event_list.id, event_list.event_name, event_list.event_date,"
 					+ " event_list.event_place, event_list.event_capacity,"
-					+ " event_list.event_contents, event_list.event_remarks"
+					+ " event_list.event_contents, event_list.event_remarks,"
+					+ " event_list.file_name"
 					+ " FROM event_list";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -58,7 +59,8 @@ public class EventDaoImpl implements EventDao {
 			String sql ="SELECT"
 					  + " event_list.id, event_list.event_name, event_list.event_date,"
 					  + " event_list.event_place, event_list.event_capacity,"
-					  + " event_list.event_contents, event_list.event_remarks"
+					  + " event_list.event_contents, event_list.event_remarks,"
+					  + " event_list.file_name"
 					  + " FROM event_list"
 					  + " WHERE date_format(event_date, \"%Y-%m\") = ?";
 			
@@ -84,7 +86,8 @@ public class EventDaoImpl implements EventDao {
 			String sql = "SELECT" 
 					+ " event_list.id, event_list.event_name, event_list.event_date,"
 					+ " event_list.event_place, event_list.event_capacity,"
-					+ " event_list.event_contents, event_list.event_remarks"
+					+ " event_list.event_contents, event_list.event_remarks,"
+					+ " event_list.file_name"
 					+ " FROM event_list"
 					+ " LEFT JOIN user_list"
 					+ " ON event_list.id = user_list.reserve_num"
@@ -138,8 +141,8 @@ public class EventDaoImpl implements EventDao {
 			
 			String sql = "INSERT INTO event_list"
 					   + " (event_name, event_date, event_place, event_capacity,"
-					   + " event_contents, event_remarks)"
-					   + " VALUES (?, ?, ?, ?, ?, ?)";
+					   + " event_contents, event_remarks, file_name)"
+					   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,event.getName());
@@ -155,6 +158,7 @@ public class EventDaoImpl implements EventDao {
 			stmt.setObject(4,event.getCapacity(), Types.INTEGER);
 			stmt.setString(5,event.getContents());
 			stmt.setString(6,event.getRemarks());
+			stmt.setString(7,event.getFileName());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			
@@ -169,7 +173,8 @@ public class EventDaoImpl implements EventDao {
 		try(Connection con = ds.getConnection()){
 			String sql = "UPDATE event_list"
 					+ " SET event_name = ?, event_date = ?, event_place = ?,"
-					+ " event_capacity = ?, event_contents = ?, event_remarks = ?"
+					+ " event_capacity = ?, event_contents = ?, event_remarks = ?,"
+					+ " file_name = ?"
 					+ " WHERE id = ?";
 			 
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -182,7 +187,8 @@ public class EventDaoImpl implements EventDao {
 			stmt.setObject(4,event.getCapacity(), Types.INTEGER);
 			stmt.setString(5,event.getContents());
 			stmt.setString(6,event.getRemarks());
-			stmt.setObject(7,event.getId(),Types.INTEGER);
+			stmt.setString(7,event.getFileName());
+			stmt.setObject(8,event.getId(),Types.INTEGER);
 			stmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -216,7 +222,8 @@ public class EventDaoImpl implements EventDao {
 		String contents = rs.getString("event_contents");
 		String remarks = rs.getString("event_remarks");
 		Integer remaining = 0;
-		String fileName = null;
+		String fileName = rs.getString("file_name");
+		//System.out.println(fileName);
 
 		return new Event(id, name, date, place, capacity, contents, remarks, remaining, fileName);
 	}

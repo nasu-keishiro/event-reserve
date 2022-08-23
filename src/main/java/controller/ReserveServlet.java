@@ -49,6 +49,12 @@ public class ReserveServlet extends HttpServlet {
 				EventDao eventDao = DaoFactory.createEventDao();
 				Event event = eventDao.findById(eventId);
 				
+				 // イメージ画像がない場合は、noImage.jpgを代入
+				if( event.getFileName() != null) {
+			    	
+				}else{
+					 event.setFileName("noImage.jpg");
+				}
 				
 				//１件分のイベント情報
 				request.setAttribute("eventId", event.getId());
@@ -57,6 +63,7 @@ public class ReserveServlet extends HttpServlet {
 				request.setAttribute("place", event.getPlace());
 				request.setAttribute("contents", event.getContents());
 				request.setAttribute("remaining", remaining);
+				request.setAttribute("fileName", event.getFileName());
 	
 	
 				request.getRequestDispatcher("/WEB-INF/view/reserveForm.jsp").forward(request, response);
@@ -120,9 +127,20 @@ public class ReserveServlet extends HttpServlet {
 		ReserveDao reserveDao = DaoFactory.createReserveDao();
 		reserveDao.insert(reserve);
 		
+		
+		
 		//予約完了リストに入力情報を表示
 		EventDao eventDao = DaoFactory.createEventDao();
 		Event event = eventDao.findById(reserveNum);
+		
+        // イメージ画像がない場合は、noImage.jpgを代入
+		if( event.getFileName() != null) {
+	    	
+		}else{
+			 event.setFileName("noImage.jpg");
+		}
+		
+		
 		request.setAttribute("name",name);
 		request.setAttribute("age",age);
 		request.setAttribute("address",address);
@@ -130,6 +148,7 @@ public class ReserveServlet extends HttpServlet {
 		request.setAttribute("email",email);
 		request.setAttribute("eventName",event.getName());
 		request.setAttribute("confirmationNum", confirmationNum);
+		request.setAttribute("fileName", event.getFileName());
 		
 		request.getRequestDispatcher("/WEB-INF/view/reserveDone.jsp").forward(request, response);
 		}catch(Exception e) {

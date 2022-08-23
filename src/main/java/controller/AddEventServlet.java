@@ -23,7 +23,7 @@ import domain.Event;
  */
 @WebServlet("/addEvent")
 //アップロードされたファイルの一時保存場所のパス
-@MultipartConfig(location="C:/temp")
+@MultipartConfig(location="C:/Users/zd2L22/temp")
 public class AddEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -71,6 +71,7 @@ public class AddEventServlet extends HttpServlet {
 			Part part = request.getPart("image");
 			String fileName = part.getSubmittedFileName();
 			long fileSize = part.getSize();
+			//System.out.println(fileName);
 			
 			//ファイルの保存
 			if(fileSize > 0) {

@@ -34,14 +34,14 @@
 <br>
 <div class="form-wrapper">
 
-	<form class="form" action="" method="post">
+	<form class="form" action="" method="post" enctype="multipart/form-data">
 		<div class="rigth">
 		<p>タイトル：<input class="text" type="text" name="name" value=""></p>
 		<p>日時：<input class="text" type="datetime-local" name="date" value="" step="300"></p>
 		<p>場所：<input class="text" type="text" name="place" value=""></p>
 		<p>定員：<input class="text" type="number" name="capacity" value=""></p>
 		</div>
-		<p>イベント画像：<input type="file" name="image" size="30" ></p>
+		<p>イベント画像：<input type="file" name="image" ></p>
 		<p>内容：
 	  		<br><textarea name="contents" cols="80" rows="5"></textarea></p>
 		<p>特記事項：

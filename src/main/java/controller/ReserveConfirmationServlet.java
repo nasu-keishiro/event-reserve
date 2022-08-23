@@ -65,11 +65,19 @@ public class ReserveConfirmationServlet extends HttpServlet {
 			EventDao eventDao = DaoFactory.createEventDao();
 			Event event = eventDao.findById(reserve.getReserveNum());
 			
+			 // イメージ画像がない場合は、noImage.jpgを代入
+			if( event.getFileName() != null) {
+		    	
+			}else{
+				 event.setFileName("noImage.jpg");
+			}
+			
 			request.setAttribute("eventName", event.getName());
 			request.setAttribute("date", event.getDate());
 			request.setAttribute("place", event.getPlace());
 			request.setAttribute("capacity", event.getCapacity());
 			request.setAttribute("contents", event.getContents());
+			request.setAttribute("fileName", event.getFileName());
 			
 			request.getRequestDispatcher("WEB-INF/view/reserveConfirmationDone.jsp").forward(request, response);
 			

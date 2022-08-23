@@ -7,8 +7,9 @@
 <title>イベント予約フォーム</title>
 <link rel="stylesheet" href="././css/style_user.css">
 <link rel="stylesheet" href="././css/style_user_ref.css">
-<style type="text/css"> /*DBに登録してある画像を表示させる*/
-	header {background-image: url('https://cdn.pixabay.com/photo/2013/03/19/23/07/easter-bunny-95096_960_720.jpg');}
+
+<style > 
+	header {background-image: url("images/<c:out value="${fileName}" />");}
 </style>
 </head>
 <body>
@@ -33,6 +34,8 @@
 	<form action="" method="post" class="form">
 	<p>名前：<input class="text" type="text" name="name" ></p>
 	<p>年齢：<input class="text" type="number" name="age" ></p>
+	<%-- TODO 住所自動入力の実装 --%>
+	<%-- WebAPIを使って --%>
 	<p>住所：<input class="text" type="text" name="address" ></p>
 	<p>電話番号：<input class="text" type="number" name="tell" ></p>
 	<p>E-mail：<input class="text" type="text" name="email" ></p>
@@ -41,7 +44,7 @@
 	<input type="checkbox" id="privacyCheck" >
 	<br>
 	
-	<p class="text-center"><input type="submit" id="js-submit" value="予約する" disabled></p>
+	<p class="text-center"><input type="submit" id="js-submit" value="予約する"  disabled></p>
 	</form>
 	</div>
 	
