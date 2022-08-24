@@ -36,6 +36,8 @@
 	<p>年齢：<input class="text" type="number" name="age" ></p>
 	<%-- TODO 住所自動入力の実装 --%>
 	<%-- WebAPIを使って --%>
+	<p>郵便番号：<input type="text" id="zip">
+	<button id="btn">検索</button></p>
 	<p>住所：<input class="text" type="text" name="address" ></p>
 	<p>電話番号：<input class="text" type="number" name="tell" ></p>
 	<p>E-mail：<input class="text" type="text" name="email" ></p>

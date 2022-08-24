@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,11 +70,31 @@ public class EventListServlet extends HttpServlet {
 		      }
 			  
 			}else {
-				// TODO 絞り込んで直近の7件のイベントを表示
-				// streamAPIで並び替えて絞る
+				
 			    eventList = eventDao.findAll();	
+			    int i = 0;
+			    while(eventList.size() > i) {
+			  //リスト型からIdを取得
+			  Event event = eventList.get(i);
+			  //event型の一つのまとまり(id name address...)がi番目の配列のまとまりとして取り出し
+			  //その中のIdを取得している↓
+			  int eventId =event.getId();
+			    
+			  //残り予約数を取得
+			  Capacity capa = new Capacity();
+			  Integer remaining = capa.getRemaining(eventId);
+		      //リスト型にremainingを上書き
+		      event.setRemaining(remaining);
+		      
+		      i++;
+		      }
 			    
 			}
+			
+			// streamAPIで並び替える
+		    eventList = eventList.stream()
+		    			.sorted(Comparator.comparing(Event::getDate))
+		    			.collect(Collectors.toList());
 			
 			// jsp用にセット
 			request.setAttribute("eventList",eventList );
