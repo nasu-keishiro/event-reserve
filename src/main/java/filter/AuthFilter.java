@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthFilter
  */
-@WebFilter("/*")
-//TODO 管理者画面だけフィルター
+// 管理者画面だけフィルター
+@WebFilter(urlPatterns={"/login","/reserveList","/eventList","/addEvent","/deleteEvent","/reserveMonthList","/updateEvent"})
 public class AuthFilter extends HttpFilter implements Filter {
        
     /**
