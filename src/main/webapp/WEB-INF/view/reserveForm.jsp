@@ -36,9 +36,9 @@
 	<p>年齢：<input class="text" type="number" name="age" ></p>
 	<%-- TODO 住所自動入力の実装 --%>
 	<%-- WebAPIを使って --%>
-	<p>郵便番号：<input type="text" id="zip">
+	<p>郵便番号：<input type="text" id="zip" max="7">
 	<button id="btn">検索</button></p>
-	<p>住所：<input class="text" type="text" name="address" ></p>
+	<p>住所：<input id="address" class="text" type="text" name="address" value="" ></p>
 	<p>電話番号：<input class="text" type="number" name="tell" ></p>
 	<p>E-mail：<input class="text" type="text" name="email" ></p>
 	<p>予約イベント：<input type="checkbox" name="eventId" value="<c:out value="${eventId}" />"  checked ><c:out value="${name}" /></p>
@@ -50,25 +50,26 @@
 	</form>
 	</div>
 	
+    <script src="js/jquery-3.6.0.min.js"></script>
 	<script>
-	<%-- 残り予約数が0の時の処理 --%>
-	let	remainig = <c:out value="${remaining}" />; <%-- JSPでの記述<c:out value="${remaining}" />; --%>
-	<%-- let element = document.getElementById('privacyCheck'); --%>
+	// 残り予約数が0の時の処理 --%>
+	let	remainig = <c:out value="${remaining}" />; 
+	// let element = document.getElementById('privacyCheck'); --%>
     if( remainig <= 0){
-    	document.getElementById('red').style.color = 'red'; <%-- 残り予約数を赤文字にする --%>
+    	document.getElementById('red').style.color = 'red'; // 残り予約数を赤文字にする --%>
 	const button = document.querySelector("#js-submit");
-	<%-- またはconst button = document.getElementById("ボタンのID"); --%>
+	// またはconst button = document.getElementById("ボタンのID"); --%>
 	button.disabled = true
     }else{
-	<%-- 同意するのチェックボックス --%>
+	// 同意するのチェックボックス --%>
 	const consent_chk = document.querySelector(`#privacyCheck`);
-	<%-- 送信ボタン --%>
+	// 送信ボタン --%>
 	const submit_btn = document.querySelector(`input[type=submit]`);
 
-	<%-- チェックボックスの入力イベント --%>
+	// チェックボックスの入力イベント --%>
 	consent_chk.addEventListener('change', () => {
 	
-	<%-- チェックボックスがあれば無効化をオフ、なければオン --%>
+	// チェックボックスがあれば無効化をオフ、なければオン --%>
 	if (consent_chk.checked === true) {
 		submit_btn.disabled = false;
 	} else {
@@ -77,6 +78,47 @@
 });
 	}
 
+	</script>
+	
+	<script>
+
+	
+	$(document).ready(function(){
+		$('#btn').click(function(){
+			// 入力値の取得
+			const zip = $('#zip').val();
+			
+			// リクエストの送信先URL　＋　入力された郵便番号
+			const endpoint = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + zip;
+			
+			// AJAX通信
+			$.ajax({
+			  // 引数にscriptのオブジェクトをとる
+			  url:endpoint,
+			  type:'GET',
+			  dataType:'JSONP' // 郵便番号は少し特殊でJSONPとなる、だいたいはJSONが多い
+			  })	
+			 .done(function(res){
+				        
+				   if(res.status != 200) {
+				        alert(res.message);
+				    }
+				    else {
+				    
+				        const r = res.results[0];
+				        const address = r.address1 + r.address2 + r.address3;
+				        console.log(address)
+				        $('#address').val(address);
+				      }
+				    })
+			 .fail(function(){
+				 alert('通信失敗')
+			  });
+			
+				       return false // form内にボタンが２つあると同時に二つとも機能してしまうため、機能を消す
+		}); //click
+	}); //ready
+	
 	</script>
 	
 	<a href="event">イベント一覧へ戻る</a>

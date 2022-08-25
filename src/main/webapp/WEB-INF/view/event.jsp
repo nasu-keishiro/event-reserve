@@ -74,6 +74,17 @@
 		<li><a href="">お問い合わせ</a></li>
 
 	</ul>
+	
+	<script>
+	// 日時の取得
+	
+	
+	// 日時マイナスの場合の処理　<a>のhrefの書き換え
+	// 日時プラスの時は、書き換えなし
+	
+	
+	</script>
+	
 
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
