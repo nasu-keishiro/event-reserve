@@ -1,5 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,12 +52,12 @@
 <div class="event">
 
 <img class="img" src="images/<c:out value="${event.fileName}" />">
-<div class="detail">
-<p>イベント名:<a href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></p>
-<p>日程:<c:out value="${event.date}" /></p>
+<div class="detail" class="eventDate" data-event-date="<fmt:formatDate value="${event.date}" pattern="yyyy-MM-dd" />">
+<p>イベント名:<a class="name" href="reserve?id=<c:out value="${event.id}" />"><c:out value="${event.name}"/></a></p>
+<p>日程:<fmt:formatDate value="${event.date}" pattern="yyyy年MM月dd日 h:mm" /></p>
 <p>場所:<c:out value="${event.place}" /></p>
 <p>定員:<c:out value="${event.capacity}" /></p>
-<p>残り枠数:<c:out value="${event.remaining}" /></p>
+<p class="nokori">残り枠数:<c:out value="${event.remaining}" /></p>
 </div>
 </div>
 <br>
@@ -75,20 +77,36 @@
 
 	</ul>
 	
-	<script>
-	// 日時の取得
-	
-	
-	// 日時マイナスの場合の処理　<a>のhrefの書き換え
-	// 日時プラスの時は、書き換えなし
-	
-	
-	</script>
-	
-
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>
-	<c:import url="parts/commonJs.jsp" />
+	
+	
+	 
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	let date1 = Date.now();
+	
+	$('.detail').each(function(){
+		// イベントの日付の情報を取得
+		let date2 = Date.parse( $(this).attr('data-event-date'));
+		// 比較
+		if(date1 - date2 > 0){
+			
+		// 過ぎていたら、この子要素の.nokoriを色変え
+		$(this).children('.nokori').css('color', 'red');
+		$(this).children('.nokori').text('イベントは終了しました。');
+		$(this).children('p:first-child').children('.name').attr('href', 'review');
+		
+	}	//if
+	}); // each
+	
+}); // document
+</script>
+	
+
+	
+	
 </body>
 </html>

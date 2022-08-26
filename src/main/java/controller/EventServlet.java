@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import calculation.Capacity;
 import dao.DaoFactory;
 import dao.EventDao;
@@ -86,10 +88,20 @@ public class EventServlet extends HttpServlet {
 				i++;
 
 			}
+			
+			//System.out.println(eventList.get(0).getDate()); //リスト型の一部だけを取り出す
+			
 			// 日付で並び替え
 			eventList = eventList.stream()
 	    			.sorted(Comparator.comparing(Event::getDate))
 	    			.collect(Collectors.toList());
+			
+			// JSPにeventListの受け渡し(jackson)
+			ObjectMapper mapper = new ObjectMapper();
+			String result = mapper.writeValueAsString(eventList);
+			request.setAttribute("scrEventList", result);
+			
+			
 
 			request.setAttribute("eventMonthList", eventList);
 			request.getRequestDispatcher("/WEB-INF/view/event.jsp").forward(request, response);

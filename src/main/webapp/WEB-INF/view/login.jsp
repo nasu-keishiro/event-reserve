@@ -20,10 +20,10 @@
 
 <form action="" method="post">
 <p>
-<input type="text" name="loginId" placeholder="ログインID">
+<input type="text" name="loginId" placeholder="ログインID" required>
 </p>
 <p>
-<input type="password" name="loginPass" placeholder="パスワード">
+<input type="password" name="loginPass" placeholder="パスワード" required>
 </p>
 <p>
 <input type="submit" value="ログイン">
