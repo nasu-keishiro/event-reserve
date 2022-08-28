@@ -17,6 +17,10 @@ public class DaoFactory {
 	public static ReserveDao createReserveDao() {
 		return new ReserveDaoImpl(getDataSource());
 	}
+	
+	public static ReviewDao createReviewDao() {
+		return new ReviewDaoImpl (getDataSource());
+	}
 
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
