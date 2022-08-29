@@ -69,7 +69,7 @@
 
 	
 	<ul>
-		<li>ホーム</li>
+		<li><a href="event">ホーム</a></li>
 		<li><a href="">会社概要</a></li>
 		<li><a href="">スタッフ紹介</a></li>
 		<li><a href="">採用情報</a></li>
@@ -97,7 +97,9 @@ $(document).ready(function(){
 		// 過ぎていたら、この子要素の.nokoriを色変え
 		$(this).children('.nokori').css('color', 'red');
 		$(this).children('.nokori').text('イベントは終了しました。');
-		$(this).children('p:first-child').children('.name').attr('href', 'review');
+		
+		let changeL = $(this).children('p:first-child').children('.name').attr('href').replace('reserve', 'review');
+		$(this).children('p:first-child').children('.name').attr('href', changeL);
 		
 	}	//if
 	}); // each

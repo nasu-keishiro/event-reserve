@@ -6,21 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>参加者の感想</title>
-<link rel="stylesheet" href="././css/style_user.css">
 <link rel="stylesheet" href="././css/style_user_eve.css">
+<link rel="stylesheet" href="././css/style_user.css">
 </head>
 
 <style > 
 	header {background-image: url("images/<c:out value="${fileName}" />");}
 </style>
 
-<header>
 		<h1>参加者の感想</h1>
+<header>
+		<br>
 		<div class="info">
 		<h2><c:out value="${name}" /></h2>
-			<p>日程:<c:out value="${date}" /></p>
-			<p>場所:<c:out value="${plece}" /></p>
-			<p>内容:<c:out value="${contents}" /></p>
+			<p>日程:<fmt:formatDate value="${date}" pattern="yyyy年MM月dd日 h:mm" /></p>
+			<p>場所:<c:out value="${place}" /></p>
+			<p>内容:<br><c:out value="${contents}" /></p>
 		
 		</div>
 		<br>
@@ -29,34 +30,37 @@
 	</header>
 
 <body>
-
-<c:forEach items="${reviwList}" var="review">
+<br>
+<br>
+<c:forEach items="${reviewList}" var="review">
 <div class="event">
-<div class="detail" class="eventDate" data-event-date="<fmt:formatDate value="${event.date}" pattern="yyyy-MM-dd" />">
+<div class="detail" class="eventDate" >
 
-<p>ニックネーム:<c:out value="${event.name}" /></p>
-<p>評価:<c:out value="${review.evaluation}" /></p>
+<p>ニックネーム:<c:out value="${review.name}" /></p>
+<p>評価: <span class="star5_rating" data-rate="<c:out value="${review.evaluation}" />"></span></p>
 <p>コメント:<c:out value="${review.comment}" /></p>
+<!-- 
 
+ -->
 </div>
 </div>
 <br>
 <br>
 </c:forEach>
 
-<form action="">
+<form action="" method="post">
 <p>ニックネーム：<input type="text" name="name"></p>
-<p>評価：<input type="number" name="evaluation" min="1" max="5"></p>
+<p>評価：星<input type="number" name="evaluation" min="1" max="5">個</p>
+<p>E-mail:<input type="email" name="email" ></p>
 <p>コメント：<textarea name="comment" cols="40" rows="3" ></textarea></p>
-
-<input type="submit" value="書き込む" >
+<!-- 隠し属性でイベントIdを送る -->
+<input type="hidden" name="eventId" value="<c:out value="${eventId }" />">
+<input type="submit" value="書き込む"  >
 </form>
 
 	
-
-	
 	<ul>
-		<li>ホーム</li>
+		<li><a href="event">ホーム</a></li>
 		<li><a href="">会社概要</a></li>
 		<li><a href="">スタッフ紹介</a></li>
 		<li><a href="">採用情報</a></li>
@@ -72,6 +76,9 @@
 
 
 
-
 </body>
+<style>
+
+
+</style>
 </html>

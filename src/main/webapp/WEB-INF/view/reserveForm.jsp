@@ -13,8 +13,9 @@
 </style>
 </head>
 <body>
-	<header>
 		<h1>イベント予約フォーム</h1>
+		<br>
+	<header>
 		<div class="info">
 		<h2>イベント詳細</h2>
 		<p>イベント名:<c:out value="${name}" /></p>
@@ -34,7 +35,7 @@
 	<form action="" method="post" class="form">
 	<p>名前：<input class="text" type="text" name="name" ></p>
 	<p>年齢：<input class="text" type="number" name="age" ></p>
-	<%-- TODO 住所自動入力の実装 --%>
+	<%-- 住所自動入力の実装 --%>
 	<%-- WebAPIを使って --%>
 	<p>郵便番号：<input type="text" id="zip" max="7">
 	<button id="btn">検索</button></p>
@@ -124,7 +125,7 @@
 	<a href="event">イベント一覧へ戻る</a>
 	
 	<ul>
-		<li>ホーム</li>
+		<li><a href="event">ホーム</a></li>
 		<li><a href="">会社概要</a></li>
 		<li><a href="">スタッフ紹介</a></li>
 		<li><a href="">採用情報</a></li>
