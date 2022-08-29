@@ -94,9 +94,27 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public Review findByEmail(int id, String email) throws Exception {
-		
-		return null;
+	public Review findByEmail(int eventId, String email) throws Exception {
+		Review review = null;
+		try(Connection con = ds.getConnection()){
+			String sql = "SELECT * FROM review WHERE event_num = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, eventId);
+			ResultSet rs = stmt.executeQuery();
+			
+			
+			if(rs.next()) {
+			
+				if(email.equals(rs.getString("email")) ) {
+					review = mapToReview(rs);
+				}
+				
+			}
+			
+		}catch(Exception e) {
+			throw e;
+		}
+		return review;
 	}
 	
 	private Review mapToReview(ResultSet rs) throws Exception{

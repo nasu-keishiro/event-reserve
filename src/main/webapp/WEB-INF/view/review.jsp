@@ -51,6 +51,7 @@
 <form action="" method="post">
 <p>ニックネーム：<input type="text" name="name"></p>
 <p>評価：星<input type="number" name="evaluation" min="1" max="5">個</p>
+<c:if test="${not empty emailError }"><c:out value="${emailError }"></c:out></c:if>
 <p>E-mail:<input type="email" name="email" ></p>
 <p>コメント：<textarea name="comment" cols="40" rows="3" ></textarea></p>
 <!-- 隠し属性でイベントIdを送る -->
@@ -71,7 +72,6 @@
 	<footer>
 		<p>Copyright &copy; hi-life support, Inc. All Rights Reserved.</p>
 	</footer>
-
 
 
 

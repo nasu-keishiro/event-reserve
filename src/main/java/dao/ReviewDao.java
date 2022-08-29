@@ -12,6 +12,6 @@ public interface ReviewDao {
 	void insert(Review review) throws Exception;
 	void update(Review review) throws Exception;
 	void delete(Review review) throws Exception;
-	Review findByEmail(int id, String email) throws Exception;
+	Review findByEmail(int eventId, String email) throws Exception;
 	
 }

@@ -75,7 +75,7 @@ public class ReviewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Integer id = Integer.parseInt(request.getParameter("eventId")); //eventId
+		Integer eventId = Integer.parseInt(request.getParameter("eventId")); //eventId
 		String name = request.getParameter("name");
 		Integer evaluation = Integer.parseInt(request.getParameter("evaluation"));
 		String email = request.getParameter("email");
@@ -83,13 +83,16 @@ public class ReviewServlet extends HttpServlet {
 		
 		// すでに登録してあるメールアドレスの場合(eventNumとemailが合致したときリダイレクト)
 		try {
+		
 			ReviewDao reviewDao2 = DaoFactory.createReviewDao();
-			Review review2 = reviewDao2.findByEmail(id, email);
+			Review review2 = reviewDao2.findByEmail(eventId, email);
 			if(review2 != null) {
 				
-			}else {
 				request.setAttribute("emailError", "すでに登録してあるメールアドレスです。");
 				response.sendRedirect("review");
+				
+				return;
+			
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -108,7 +111,7 @@ public class ReviewServlet extends HttpServlet {
 		review.setEvaluation(evaluation);
 		review.setEmail(email);
 		review.setComment(comment);
-		review.setEventNum(id);
+		review.setEventNum(eventId);
 		
 		
 		// コメントの追加
@@ -118,7 +121,7 @@ public class ReviewServlet extends HttpServlet {
 			
 		// イベント1件分の取得
 			EventDao eventDao = DaoFactory.createEventDao();
-			Event event = eventDao.findById(id);
+			Event event = eventDao.findById(eventId);
 			request.setAttribute("eventId", event.getId());
 			request.setAttribute("name", event.getName());
 			request.setAttribute("date", event.getDate());
@@ -127,7 +130,7 @@ public class ReviewServlet extends HttpServlet {
 			request.setAttribute("fileName", event.getFileName());
 			
 		// レヴューリストの取得
-			List<Review> reviewList = reviewDao.findByEvent(id);
+			List<Review> reviewList = reviewDao.findByEvent(eventId);
 			request.setAttribute("reviewList", reviewList);
 			
 			request.getRequestDispatcher("/WEB-INF/view/review.jsp").forward(request, response);
