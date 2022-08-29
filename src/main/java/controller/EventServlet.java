@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import calculation.Capacity;
 import dao.DaoFactory;
 import dao.EventDao;
@@ -96,10 +94,11 @@ public class EventServlet extends HttpServlet {
 	    			.sorted(Comparator.comparing(Event::getDate))
 	    			.collect(Collectors.toList());
 			
+			// 使わず
 			// JSPにeventListの受け渡し(jackson)
-			ObjectMapper mapper = new ObjectMapper();
-			String result = mapper.writeValueAsString(eventList);
-			request.setAttribute("scrEventList", result);
+			//ObjectMapper mapper = new ObjectMapper();
+			//String result = mapper.writeValueAsString(eventList);
+			//request.setAttribute("scrEventList", result);
 			
 			
 
