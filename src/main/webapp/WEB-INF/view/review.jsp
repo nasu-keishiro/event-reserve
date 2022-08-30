@@ -49,14 +49,16 @@
 </c:forEach>
 
 <form action="" method="post">
-<p>ニックネーム：<input type="text" name="name"></p>
-<p>評価：星<input type="number" name="evaluation" min="1" max="5">個</p>
-<c:if test="${not empty emailError }"><c:out value="${emailError }"></c:out></c:if>
-<p>E-mail:<input type="email" name="email" ></p>
-<p>コメント：<textarea name="comment" cols="40" rows="3" ></textarea></p>
-<!-- 隠し属性でイベントIdを送る -->
-<input type="hidden" name="eventId" value="<c:out value="${eventId }" />">
-<input type="submit" value="書き込む"  >
+		<p>ニックネーム：<input type="text" name="name"></p>
+		<p>評価：星<input type="number" name="evaluation" min="1" max="5">個</p>
+	<c:if test="${not empty emailError }">
+		<p>すでに登録してあるメールアドレスです。</p>
+	</c:if>
+		<p>E-mail:<input type="email" name="email" ></p>
+		<p>コメント：<textarea name="comment" cols="40" rows="3" ></textarea></p>
+			<!-- 隠し属性でイベントIdを送る -->
+		<input type="hidden" name="eventId" value="<c:out value="${eventId }" />">
+		<input type="submit" value="書き込む"  >
 </form>
 
 	

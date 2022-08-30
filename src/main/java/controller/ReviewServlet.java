@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DaoFactory;
 import dao.EventDao;
@@ -46,12 +47,17 @@ public class ReviewServlet extends HttpServlet {
 			ReviewDao reviewDao = DaoFactory.createReviewDao();
 			List<Review> reviewList = reviewDao.findByEvent(id);
 			
+			
 			// ファイルがない場合の画像をセット
 			if (event.getFileName() != null) {
 
 			} else {
 				event.setFileName("noImage.jpg");
 			}
+			
+			// リダイレクトされた際のメールアドレスを取得
+			HttpSession session = request.getSession();
+			String email =  (String) session.getAttribute("email");
 			
 			request.setAttribute("eventId", event.getId());
 			request.setAttribute("name", event.getName());
@@ -60,6 +66,10 @@ public class ReviewServlet extends HttpServlet {
 			request.setAttribute("contents", event.getContents());
 			request.setAttribute("fileName", event.getFileName());
 			request.setAttribute("reviewList", reviewList);
+			request.setAttribute("emailError", email);
+			
+			// セッションの破棄
+			session.removeAttribute("email");
 			
 			request.getRequestDispatcher("/WEB-INF/view/review.jsp").forward(request, response);
 		;
@@ -86,11 +96,13 @@ public class ReviewServlet extends HttpServlet {
 		
 			ReviewDao reviewDao2 = DaoFactory.createReviewDao();
 			Review review2 = reviewDao2.findByEmail(eventId, email);
-			if(review2 != null) {
-				
-				request.setAttribute("emailError", "すでに登録してあるメールアドレスです。");
-				response.sendRedirect("review");
-				
+			
+			if(review2 != null) {	
+				// 同サーブレット内でリダイレクトしてdoGetにアクセスする(id情報をもって）
+				response.sendRedirect("review?id=" + eventId);
+				// sessionにメールアドレス情報を入れ、doGetで使用する
+				HttpSession session = request.getSession();
+				session.setAttribute("email", email);
 				return;
 			
 			}
