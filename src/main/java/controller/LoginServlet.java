@@ -44,12 +44,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//TODO ログイン　バリデーション
+		//TODO パスワードハッシュ化
 		try {
 			String loginId = request.getParameter("loginId");
 			String loginPass = request.getParameter("loginPass");
 			LoginDao loginDao = DaoFactory.createLoginDao();
 			Admin admin = loginDao.findByLoginIdAndLoginPass(loginId, loginPass);
 			//System.out.println(admin);
+			
+		//TODO 認証と認可
+			
 			
 			if(admin != null) {
 				//データ保持

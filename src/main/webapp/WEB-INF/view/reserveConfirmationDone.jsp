@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +15,12 @@
 </head>
 
 
-<header>
 <h1>予約イベント</h1>
+<header>
+<br>
 <div class="info">
 <p><c:out value="${eventName}"></c:out></p>
-<p>日程：<c:out value="${date}"></c:out></p>
+<p>日程：<fmt:formatDate value="${date}" pattern="yyyy年MM月dd日 h:mm" /></p>
 <p>場所：<c:out value="${place}"></c:out></p>
 <p>定員：<c:out value="${capacity}"></c:out></p>
 <p>内容：<c:out value="${contents}"></c:out></p>

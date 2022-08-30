@@ -50,6 +50,8 @@ public class ReserveConfirmationServlet extends HttpServlet {
 		//引数がStringのfindByNumで1件分のデータを取得
 		Reserve reserve = reserveDao.findByReserveNumAndReserveName(confirmationNum, name);
 		
+		//TODO 終わったイベントの確認はページ切り替え
+		
 		if(reserve != null) {
 			
 			//1件分の予約者情報の取得

@@ -36,10 +36,10 @@
 	<div class="form-wrapper">
 		<form action="" method="post" class="form" enctype="multipart/form-data">
 		<div class="rigth">
-	<p>タイトル：<input class="text" type="text" name="name" value="<c:out value="${name}" />"></p>
-	<p>日時：<input class="text" type="datetime-local" name="date" value="<c:out value="${date}" />" step="300"></p>
-	<p>場所：<input class="text" type="text" name="place" value="<c:out value="${place}" />"></p>
-	<p>定員：<input class="text" type="number" name="capacity" value="<c:out value="${capacity}" />"></p>
+	<p>タイトル：<input class="text" type="text" name="name" value="<c:out value="${name}" />" required placeholder="必須"></p>
+	<p>日時：<input class="text" type="datetime-local" name="date" value="<c:out value="${date}" />" step="300" required placeholder="必須"></p>
+	<p>場所：<input class="text" type="text" name="place" value="<c:out value="${place}" />" required placeholder="必須"></p>
+	<p>定員：<input class="text" type="number" name="capacity" value="<c:out value="${capacity}" />" required placeholder="必須"></p>
 	</div>
 	<p>イベント画像：<input type="file" name="image" ><br>
 	<label class="red">※画像を入れなおしてください</label></p>

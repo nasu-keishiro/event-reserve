@@ -13,8 +13,10 @@
 
 
 </head>
-<header>
 <h1>予約確認</h1>
+<%-- TODO キャンセルの実装 --%>
+<header>
+<br>
 <div class="info">
 <p> 予約番号と氏名をご入力ください。</p>
 </div>
@@ -25,8 +27,8 @@
 <body>
 <div class="form-wrapper">
 <form action="" method="post" class="form">
-<p><label class="moji">予約番号</label>:<input type="text" class="text" name="confirmationNum"></p>
-<p><label class="moji">氏名</label>:<input type="text" class="text" name="name"></p>
+<p><label class="moji">予約番号</label>:<input type="text" class="text" name="confirmationNum" required placeholder="必須"></p>
+<p><label class="moji">氏名</label>:<input type="text" class="text" name="name" required placeholder="必須"></p>
 
 <p class="text-center"><input type="submit" value="送信"></p>
 </form>

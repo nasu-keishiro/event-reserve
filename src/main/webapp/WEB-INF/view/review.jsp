@@ -37,7 +37,7 @@
 <div class="detail" class="eventDate" >
 
 <p>ニックネーム:<c:out value="${review.name}" /></p>
-<p>評価: <span class="star5_rating" data-rate="<c:out value="${review.evaluation}" />"></span></p>
+<p>評価: <span class="star5_rating" data-rate="<c:out value="${review.evaluation}" />" ></span></p>
 <p>コメント:<c:out value="${review.comment}" /></p>
 <!-- 
 
@@ -50,12 +50,12 @@
 
 <form action="" method="post">
 		<p>ニックネーム：<input type="text" name="name"></p>
-		<p>評価：星<input type="number" name="evaluation" min="1" max="5">個</p>
+		<p>評価：星<input type="number" name="evaluation" min="1" max="5" required  placeholder="必須">個</p>
 	<c:if test="${not empty emailError }">
-		<p>すでに登録してあるメールアドレスです。</p>
+		<p><span class="emailerror">すでに登録してあるメールアドレスです。</span></p>
 	</c:if>
-		<p>E-mail:<input type="email" name="email" ></p>
-		<p>コメント：<textarea name="comment" cols="40" rows="3" ></textarea></p>
+		<p>E-mail:<input type="email" name="email" required placeholder="必須" ></p>
+		<p>コメント：<textarea name="comment" cols="40" rows="3" required placeholder="必須" ></textarea></p>
 			<!-- 隠し属性でイベントIdを送る -->
 		<input type="hidden" name="eventId" value="<c:out value="${eventId }" />">
 		<input type="submit" value="書き込む"  >

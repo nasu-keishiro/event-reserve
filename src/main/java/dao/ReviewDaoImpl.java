@@ -22,7 +22,7 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	@Override
 	public List<Review> findAll() throws Exception {
-		// TODO  未実装
+		
 		return null;
 	}
 

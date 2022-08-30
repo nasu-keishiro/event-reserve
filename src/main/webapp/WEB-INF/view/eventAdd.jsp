@@ -36,14 +36,14 @@
 
 	<form class="form" action="" method="post" enctype="multipart/form-data">
 		<div class="rigth">
-		<p>タイトル：<input class="text" type="text" name="name" value=""></p>
-		<p>日時：<input class="text" type="datetime-local" name="date" value="" step="300"></p>
-		<p>場所：<input class="text" type="text" name="place" value=""></p>
-		<p>定員：<input class="text" type="number" name="capacity" value=""></p>
+		<p>タイトル：<input class="text" type="text" name="name" value="" required placeholder="必須"></p>
+		<p>日時：<input class="text" type="datetime-local" name="date" value="" step="300" required placeholder="必須"></p>
+		<p>場所：<input class="text" type="text" name="place" value="" required placeholder="必須"></p>
+		<p>定員：<input class="text" type="number" name="capacity" value="" required placeholder="必須"></p>
 		</div>
 		<p>イベント画像：<input type="file" name="image" ></p>
 		<p>内容：
-	  		<br><textarea name="contents" cols="80" rows="5"></textarea></p>
+	  		<br><textarea name="contents" cols="80" rows="5" ></textarea></p>
 		<p>特記事項：
 	  		<br><textarea name="remarks" cols="40" rows="3"></textarea></p>
 		<p class="text-center"><input type="submit" value="作成"></p>

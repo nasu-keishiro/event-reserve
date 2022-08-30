@@ -62,6 +62,7 @@ public class ReserveServlet extends HttpServlet {
 				request.setAttribute("date", event.getDate());
 				request.setAttribute("place", event.getPlace());
 				request.setAttribute("contents", event.getContents());
+				request.setAttribute("capacity", event.getCapacity());
 				request.setAttribute("remaining", remaining);
 				request.setAttribute("fileName", event.getFileName());
 	
@@ -78,21 +79,12 @@ public class ReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//XXX キャッシュ無効処理　エラー	 
-		// キャッシュを無効にする
-			//esponse.setHeader("Pragma","no-cache");
-			//response.setHeader("Cache-Control","no-cache");
-			//response.setDateHeader("Expires",0);
-			
-			/*response.setContentType("text/html; charset=Shift_JIS");
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<head><title>CacheServlet</title></head>");
-			out.println("<body>");
-			out.println("このページはキャッシュされません。");
-			out.println("</body></html>");
-			out.close();
-		*/
+			 
+		//  キャッシュを無効にする、様々なブラウザに対応するために複数必要
+			response.setHeader("Pragma","no-cache");
+			response.setHeader("Cache-Control","no-cache");
+			response.setDateHeader("Expires",0);
+		
 		
 		//TODO ユーザー予約　バリデーション
 		
