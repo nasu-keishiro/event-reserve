@@ -98,11 +98,11 @@ public class ReviewServlet extends HttpServlet {
 			Review review2 = reviewDao2.findByEmail(eventId, email);
 			
 			if(review2 != null) {	
-				// 同サーブレット内でリダイレクトしてdoGetにアクセスする(id情報をもって）
-				response.sendRedirect("review?id=" + eventId);
 				// sessionにメールアドレス情報を入れ、doGetで使用する
 				HttpSession session = request.getSession();
 				session.setAttribute("email", email);
+				// 同サーブレット内でリダイレクトしてdoGetにアクセスする(id情報をもって）
+				response.sendRedirect("review?id=" + eventId);
 				return;
 			
 			}

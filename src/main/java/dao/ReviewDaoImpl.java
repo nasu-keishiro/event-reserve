@@ -103,7 +103,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			ResultSet rs = stmt.executeQuery();
 			
 			
-			if(rs.next()) {
+			while(rs.next()) {
 			
 				if(email.equals(rs.getString("email")) ) {
 					review = mapToReview(rs);
