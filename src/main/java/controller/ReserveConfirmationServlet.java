@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,7 +52,7 @@ public class ReserveConfirmationServlet extends HttpServlet {
 		//引数がStringのfindByNumで1件分のデータを取得
 		Reserve reserve = reserveDao.findByReserveNumAndReserveName(confirmationNum, name);
 		
-		//TODO 終わったイベントの確認はページ切り替え
+		
 		
 		if(reserve != null) {
 			
@@ -81,9 +83,20 @@ public class ReserveConfirmationServlet extends HttpServlet {
 			request.setAttribute("contents", event.getContents());
 			request.setAttribute("fileName", event.getFileName());
 			
-			request.getRequestDispatcher("WEB-INF/view/reserveConfirmationDone.jsp").forward(request, response);
+			// 予約番号が正しく、イベントが終わっているとき
+			Calendar c = Calendar.getInstance();
+			Date today = c.getTime(); //現在の日時
+			Date eventDay = event.getDate(); //イベントの日時
+			
+		if(eventDay.before(today)) {
+				request.getRequestDispatcher("/WEB-INF/view/doneEvent.jsp").forward(request, response);
+			}
+			
+			// 予約番号が正しいとき
+			request.getRequestDispatcher("/WEB-INF/view/reserveConfirmationDone.jsp").forward(request, response);
 			
 		}else {
+			// 予約番号が違ったとき
 			request.setAttribute("error", true);
 			request.getRequestDispatcher("/WEB-INF/view/reserveConfirmation.jsp").forward(request, response);
 		}

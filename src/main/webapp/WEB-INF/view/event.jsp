@@ -44,7 +44,7 @@
 <input name="month" type="month" min="" max="" value="2022-08">
 <input type="submit">
 </form>
-<h3><a href="reserveConfirmation" class="itemB">予約確認</a></h3>
+<h3><a href="reserveConfirmation" class="itemB">予約確認/キャンセル</a></h3>
 </div>
 
 <%-- 初期表示として今月のイベント情報を表示する --%>

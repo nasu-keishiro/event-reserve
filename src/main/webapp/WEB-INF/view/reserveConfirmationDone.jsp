@@ -40,6 +40,8 @@
 <p>E-mail:<c:out value="${email}"></c:out></p>
 </div>
 
+<p><a href="">キャンセル</a></p>
+
 <a href="event">戻る</a>
 
 </body>
