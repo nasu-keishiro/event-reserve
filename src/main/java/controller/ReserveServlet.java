@@ -132,6 +132,10 @@ public class ReserveServlet extends HttpServlet {
 			 event.setFileName("noImage.jpg");
 		}
 		
+		//TODO 仮予約メールを送る
+		
+		
+		
 		
 		request.setAttribute("name",name);
 		request.setAttribute("age",age);
