@@ -53,6 +53,7 @@ public class AddEventServlet extends HttpServlet {
 		try {
 			String name = request.getParameter("name");
 		
+			
 			String strDate = request.getParameter("date");
 			//LocalDateTimeでもできるかも
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");

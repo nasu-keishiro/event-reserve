@@ -22,7 +22,7 @@ import domain.Event;
  * Servlet implementation class UpdateEventServlet
  */
 @WebServlet("/updateEvent")
-@MultipartConfig(location="C:/Users/zd2L22/temp")
+@MultipartConfig(location="C:/temp")
 public class UpdateEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -74,7 +74,6 @@ public class UpdateEventServlet extends HttpServlet {
 			//編集したデータの取得
 			String strId = request.getParameter("id");
 			Integer id = Integer.parseInt(strId);
-			
 			
 			String name = request.getParameter("name");
 			
