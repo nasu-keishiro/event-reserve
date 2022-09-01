@@ -135,7 +135,7 @@ public class ReserveServlet extends HttpServlet {
 		//TODO 仮予約メールを送る
 		
 		
-		
+		//TODO 支払い機能
 		
 		request.setAttribute("name",name);
 		request.setAttribute("age",age);

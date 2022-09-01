@@ -12,6 +12,15 @@
 <style type="text/css">
 	header {background-image: url("images/<c:out value="${fileName}" />");}
 </style>
+<style>
+@media print{
+a,button{
+display:none;]}
+
+}
+
+</style>
+
 </head>
 
 <h1>予約完了</h1>
@@ -45,6 +54,7 @@
 <p>電話番号：<c:out value="${tell}" /></p>
 <p>E-mail：<c:out value="${email}" /></p>
 </div>
+<button onclick="print()">印刷</button>
 
 <a href="event">イベント一覧へ戻る</a>
 

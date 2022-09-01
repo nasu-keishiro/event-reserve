@@ -41,7 +41,7 @@
 <br>
 <div class="container">
 <form action="">
-<input name="month" type="month" min="" max="" value="2022-08">
+<input name="month" type="month" min="" max="" value="2022-09">
 <input type="submit">
 </form>
 <h3><a href="reserveConfirmation" class="itemB">予約確認/キャンセル</a></h3>
