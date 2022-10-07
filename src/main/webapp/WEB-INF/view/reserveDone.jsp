@@ -55,6 +55,8 @@ display:none;]}
 <p>E-mail：<c:out value="${email}" /></p>
 </div>
 <button onclick="print()">印刷</button>
+<br>
+<br>
 
 <a href="event">イベント一覧へ戻る</a>
 
